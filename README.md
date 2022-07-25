@@ -10,3 +10,4 @@ createdb zing
 
 -   yarn add express
 -   yarn add pg
+-   yarn add bcrypt

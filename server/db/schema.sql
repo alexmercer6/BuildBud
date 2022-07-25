@@ -24,5 +24,5 @@ CREATE TABLE job (
 
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
-    job_id REFERENCES job(job_id)
+    job_id INTEGER REFERENCES job(job_id)
 );
