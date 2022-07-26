@@ -1,4 +1,5 @@
 import React from "react"
+import "./Builder.css"
 import {
     TextField,
     List,
@@ -7,8 +8,9 @@ import {
     IconButton,
     ListItemAvatar,
     ListItemButton,
-    // HomeIcon,
 } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
+import HouseIcon from "@mui/icons-material/House"
 
 const data = ["Lot 112", "Lot 113", "Lot 114"]
 
@@ -20,15 +22,19 @@ function Jobs() {
                 label="Search Jobs"
                 variant="standard"
             />
-            {data.map((house) => {
-                return (
-                    <List>
-                        <ListItemButton href="/builder-dashboard/trades">
-                            <ListItemText>{house}</ListItemText>
-                        </ListItemButton>
-                    </List>
-                )
-            })}
+            <div className="listContainer">
+                {data.map((house) => {
+                    return (
+                        <List color="primary">
+                            <ListItemButton href="/builder-dashboard/trades">
+                                <HouseIcon />
+                                <ListItemText>{house}</ListItemText>
+                                <DeleteIcon />
+                            </ListItemButton>
+                        </List>
+                    )
+                })}
+            </div>
         </div>
     )
 }

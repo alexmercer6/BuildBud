@@ -123,7 +123,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="primary">
+            <AppBar position="static" color="secondary">
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -135,7 +135,7 @@ export default function Navbar() {
                         {/* <MenuIcon /> */}
                     </IconButton>
                     <Typography
-                        variant="h6"
+                        variant="h4"
                         noWrap
                         component="div"
                         sx={{ display: { sm: "block" } }}
