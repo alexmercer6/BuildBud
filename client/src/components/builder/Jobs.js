@@ -23,9 +23,9 @@ function Jobs() {
                 variant="standard"
             />
             <div className="listContainer">
-                {data.map((house) => {
+                {data.map((house, index) => {
                     return (
-                        <List color="primary">
+                        <List key={index} color="primary">
                             <ListItemButton href="/builder-dashboard/trades">
                                 <HouseIcon />
                                 <ListItemText>{house}</ListItemText>
