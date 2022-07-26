@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS materials;
 DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS builders;
@@ -26,4 +27,10 @@ CREATE TABLE job (
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
     job_id INTEGER REFERENCES job(job_id)
+);
+
+CREATE TABLE messages (
+    message_id SERIAL PRIMARY KEY,
+    trade_id INTEGER REFERENCES trades(trade_id),
+    builder_id INTEGER REFERENCES builders(builder_id)
 );
