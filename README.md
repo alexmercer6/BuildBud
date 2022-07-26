@@ -14,3 +14,4 @@ createdb zing
 -   yarn add express-session
 -   yarn add connect-pg-simple
 -   yarn add dotenv
+-   yarn add axios
