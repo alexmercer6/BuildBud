@@ -1,4 +1,4 @@
-import * as React from "react"
+// import * as React from "react"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
@@ -8,21 +8,75 @@ import Typography from "@mui/material/Typography"
 import Badge from "@mui/material/Badge"
 import MenuItem from "@mui/material/MenuItem"
 import Menu from "@mui/material/Menu"
-// import MenuIcon from "@mui/icons-material/Menu"
-import AccountCircle from "@mui/icons-material/AccountCircle"
+
 import MailIcon from "@mui/icons-material/Mail"
 import NotificationsIcon from "@mui/icons-material/Notifications"
-import MoreIcon from "@mui/icons-material/MoreVert"
+
+import MenuIcon from "@mui/icons-material/Menu"
 
 import { useState } from "react"
 
 export default function Navbar() {
-    const [anchorEl, setAnchorEl] = useState(false)
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [unreadMessages, setUnreadMessages] = useState(0)
     const [notificationsCount, setNotificationsCount] = useState(0)
 
-    const menuId = "primary-search-account-menu"
+    // const isMobileMenuOpen = mobileMoreAnchorEl
+
+    const handleMobileMenuClose = () => {
+        setIsMobileMenuOpen(false)
+        setMobileMoreAnchorEl(null)
+    }
+
+    const handleMobileMenuOpen = (event) => {
+        setIsMobileMenuOpen(true)
+        setMobileMoreAnchorEl(event.currentTarget)
+    }
+
+    const mobileMenuId = "primary-search-account-menu-mobile"
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 4 new mails"
+                    color="inherit"
+                >
+                    <Badge badgeContent={unreadMessages} color="error">
+                        <MailIcon />
+                    </Badge>
+                </IconButton>
+                <p>Messages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={notificationsCount} color="error">
+                        <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+        </Menu>
+    )
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -67,8 +121,21 @@ export default function Navbar() {
                             </Badge>
                         </IconButton>
                     </Box>
+                    <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={handleMobileMenuOpen}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Box>
                 </Toolbar>
             </AppBar>
+            {renderMobileMenu}
         </Box>
     )
 }
