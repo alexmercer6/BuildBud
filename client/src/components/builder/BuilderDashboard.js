@@ -1,14 +1,23 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Jobs from "./Jobs"
 
 function BuilderDashboard() {
+    // const [trades, setTrades] = useState([])
     // useEffect(() => {
     //     const getTrades = async () => {
-    //         const data = await axios.get("/api/users/trades")
+    //         const data = await axios.get("/api/builder/trades")
+    //         console.log(data.data)
+    //         for (const tradie of data.data) {
+    //             setTrades(...trades, tradie.name)
+    //         }
     //     }
+    //     getTrades()
     // }, [])
-    return <div></div>
+    // console.log(trades)
+
+    return <div>{<Jobs />}</div>
 }
 
 export default BuilderDashboard

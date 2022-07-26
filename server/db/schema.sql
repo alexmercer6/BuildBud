@@ -31,6 +31,7 @@ CREATE TABLE materials (
 
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
+    read BOOLEAN,
     trade_id INTEGER REFERENCES trades(trade_id),
     builder_id INTEGER REFERENCES builders(builder_id)
 );
