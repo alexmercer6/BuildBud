@@ -12,7 +12,14 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import HouseIcon from "@mui/icons-material/House"
 
-const data = ["Lot 112", "Lot 113", "Lot 114"]
+const data = [
+    "Riverstone, Lot 112",
+    "Riverstone, Lot 113",
+    "Apple, Lot 114",
+    "Hurstville, Lot 117",
+]
+
+data.sort()
 
 function Jobs() {
     return (
@@ -21,6 +28,7 @@ function Jobs() {
                 id="standard-basic"
                 label="Search Jobs"
                 variant="standard"
+                fullWidth="100%"
             />
             <div className="listContainer">
                 {data.map((house, index) => {
