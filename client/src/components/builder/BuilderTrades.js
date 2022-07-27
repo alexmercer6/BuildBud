@@ -8,6 +8,8 @@ import Crop75Icon from "@mui/icons-material/Crop75"
 import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import ArchitectureIcon from "@mui/icons-material/Architecture"
 function BuilderTrades() {
+    const handleClick = () => {}
+
     const buttonStyle = {
         height: "100px",
         width: "300px",
