@@ -13,6 +13,9 @@ import MailIcon from "@mui/icons-material/Mail"
 import NotificationsIcon from "@mui/icons-material/Notifications"
 
 import MenuIcon from "@mui/icons-material/Menu"
+import HouseIcon from "@mui/icons-material/House"
+
+import Link from "@mui/material/Link"
 
 import { useState } from "react"
 
@@ -80,15 +83,20 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="secondary">
+            <AppBar position="static" color="primary">
                 <Toolbar>
                     <IconButton
+                        variant="link"
                         size="large"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
-                    ></IconButton>
+                        href="/builder-dashboard"
+                    >
+                        <HouseIcon />
+                    </IconButton>
+
                     <Typography
                         variant="h4"
                         noWrap

@@ -17,7 +17,7 @@ function BuilderDashboard() {
     // }, [])
     // console.log(trades)
 
-    return <div>{<Jobs />}</div>
+    return <div className="builder-dashboard">{<Jobs />}</div>
 }
 
 export default BuilderDashboard

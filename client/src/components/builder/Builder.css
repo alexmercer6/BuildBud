@@ -1,4 +1,85 @@
+.builder-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
 .listContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
+
+.builder-trades {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 40px;
+}
+
+/* breakpoints */
+
+
+ 
+  
+  @media screen and (max-width: 1200px) {
+    .builder-trades {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+   
+        gap: 10px;
+        padding: 40px;
+    }
+
+    .listContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+  }
+  @media screen and (max-width: 1024px) {
+    .listContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .builder-trades {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 40px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    /* .builder-dashboard {
+        display: flex;
+        align-items: flex-start!important;
+        justify-content: center;
+        height: 90vh;
+    } */
+    .builder-trades {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 40px;
+    }
+    .listContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+   
+  }
+
+  @media screen and (max-width: 480px) {
+
+    .builder-trades {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 40px;
+    }
+    .builder-trades Button {
+        height: 300px;
+    }
+
+  }

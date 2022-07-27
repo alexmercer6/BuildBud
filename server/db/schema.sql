@@ -8,6 +8,7 @@ CREATE TABLE builders (
     builder_id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255),
+    phone_number INTEGER,
     password_hash VARCHAR(255)
 );
 
@@ -15,6 +16,7 @@ CREATE TABLE trades (
     trade_id SERIAL PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255),
+    phone_number INTEGER,
     password_hash VARCHAR(255),
     trade VARCHAR(255)
 );
@@ -26,6 +28,7 @@ CREATE TABLE job (
 
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
+    material TEXT,
     job_id INTEGER REFERENCES job(job_id)
 );
 
