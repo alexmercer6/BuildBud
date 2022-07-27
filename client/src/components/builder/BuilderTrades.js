@@ -15,7 +15,12 @@ function BuilderTrades() {
     return (
         <div className="builder-dashboard">
             <div className="builder-trades">
-                <Button alt="plumber" variant="contained" style={buttonStyle}>
+                <Button
+                    alt="plumber"
+                    variant="contained"
+                    style={buttonStyle}
+                    href="trades/trade"
+                >
                     <PlumbingIcon />
                     Plumber
                 </Button>

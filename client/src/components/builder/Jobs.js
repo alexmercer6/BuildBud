@@ -1,14 +1,6 @@
 import React from "react"
 import "./Builder.css"
-import {
-    TextField,
-    List,
-    ListItemText,
-    Avatar,
-    IconButton,
-    ListItemAvatar,
-    ListItemButton,
-} from "@mui/material"
+import { TextField, List, ListItemText, ListItemButton } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import HouseIcon from "@mui/icons-material/House"
 
@@ -28,7 +20,7 @@ function Jobs() {
                 id="standard-basic"
                 label="Search Jobs"
                 variant="standard"
-                fullWidth="100%"
+                fullWidth={true}
             />
             <div className="listContainer">
                 {data.map((house, index) => {
