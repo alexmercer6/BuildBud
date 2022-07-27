@@ -51,12 +51,12 @@
     }
   }
   @media screen and (max-width: 768px) {
-    .builder-dashboard {
+    /* .builder-dashboard {
         display: flex;
         align-items: flex-start!important;
         justify-content: center;
         height: 90vh;
-    }
+    } */
     .builder-trades {
         display: grid;
         grid-template-columns: 1fr;
