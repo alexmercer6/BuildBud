@@ -8,6 +8,8 @@ import Crop75Icon from "@mui/icons-material/Crop75"
 import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import ArchitectureIcon from "@mui/icons-material/Architecture"
 function BuilderTrades() {
+    const handleClick = () => {}
+
     const buttonStyle = {
         height: "100px",
         width: "300px",
@@ -15,7 +17,12 @@ function BuilderTrades() {
     return (
         <div className="builder-dashboard">
             <div className="builder-trades">
-                <Button alt="plumber" variant="contained" style={buttonStyle}>
+                <Button
+                    alt="plumber"
+                    variant="contained"
+                    style={buttonStyle}
+                    href="trades/trade"
+                >
                     <PlumbingIcon />
                     Plumber
                 </Button>

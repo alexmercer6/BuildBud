@@ -18,6 +18,12 @@
     padding: 40px;
 }
 
+.builder-trade-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* breakpoints */
 
 

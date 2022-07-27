@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import BuilderDashboard from "./components/builder/BuilderDashboard"
 import Navbar from "./components/navbar/Navbar"
 import BuilderTrades from "./components/builder/BuilderTrades"
+import BuilderTrade from "./components/builder/BuilderTrade"
 
 function App() {
     return (
@@ -18,6 +19,10 @@ function App() {
                     <Route
                         path="builder-dashboard/trades"
                         element={<BuilderTrades />}
+                    />
+                    <Route
+                        path="builder-dashboard/trades/trade"
+                        element={<BuilderTrade />}
                     />
                 </Routes>
             </BrowserRouter>

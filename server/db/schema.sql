@@ -1,6 +1,7 @@
+DROP TABLE IF EXISTS assigned_jobs;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS materials;
-DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS builders;
 DROP TABLE IF EXISTS trades;
 
@@ -21,18 +22,24 @@ CREATE TABLE trades (
     trade VARCHAR(255)
 );
 
-CREATE TABLE job (
+CREATE TABLE jobs (
     job_id SERIAL PRIMARY KEY,
     address VARCHAR(255),
-    trade_id INTEGER REFERENCES trades(trade_id),
     builder_id INTEGER REFERENCES builders(builder_id)
+);
+
+CREATE TABLE assigned_jobs (
+    assigned_job_id SERIAL PRIMARY KEY,
+    job_id INTEGER REFERENCES jobs(job_id),
+    builder_id INTEGER REFERENCES builders(builder_id),
+    trade_id INTEGER REFERENCES trades(trade_id)
 );
 
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
     material TEXT,
-    job_id INTEGER REFERENCES job(job_id)
-    trade_id INTEGER REFERENCES trades(trade_id)
+    job_id INTEGER REFERENCES jobs(job_id),
+    trade_id INTEGER REFERENCES trades(trade_id),
     builder_id INTEGER REFERENCES builders(builder_id)
 );
 
