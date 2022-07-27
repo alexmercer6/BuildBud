@@ -4,16 +4,14 @@ import { TextField, List, ListItemText, ListItemButton } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import HouseIcon from "@mui/icons-material/House"
 
-const data = [
-    "Riverstone, Lot 112",
-    "Riverstone, Lot 113",
-    "Apple, Lot 114",
-    "Hurstville, Lot 117",
-]
+// const data = [
+//     "Riverstone, Lot 112",
+//     "Riverstone, Lot 113",
+//     "Apple, Lot 114",
+//     "Hurstville, Lot 117",
+// ]
 
-data.sort()
-
-function Jobs() {
+function Jobs({ data }) {
     return (
         <div>
             <TextField
@@ -28,7 +26,7 @@ function Jobs() {
                         <List key={index} color="primary">
                             <ListItemButton href="/builder-dashboard/trades">
                                 <HouseIcon />
-                                <ListItemText>{house}</ListItemText>
+                                <ListItemText>{house.address}</ListItemText>
                                 <DeleteIcon />
                             </ListItemButton>
                         </List>
