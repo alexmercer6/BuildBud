@@ -23,13 +23,17 @@ CREATE TABLE trades (
 
 CREATE TABLE job (
     job_id SERIAL PRIMARY KEY,
-    address VARCHAR(255)
+    address VARCHAR(255),
+    trade_id INTEGER REFERENCES trades(trade_id),
+    builder_id INTEGER REFERENCES builders(builder_id)
 );
 
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
     material TEXT,
     job_id INTEGER REFERENCES job(job_id)
+    trade_id INTEGER REFERENCES trades(trade_id)
+    builder_id INTEGER REFERENCES builders(builder_id)
 );
 
 CREATE TABLE messages (
