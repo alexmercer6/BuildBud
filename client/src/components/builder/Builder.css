@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     min-height: 90vh;
+    padding: 20px;
 }
 
 .listContainer {
@@ -24,11 +25,15 @@
     align-items: center;
 }
 
+.add-job-modal > form {
+    display: grid;
+
+
+}
+
+
 /* breakpoints */
 
-
- 
-  
   @media screen and (max-width: 1200px) {
     .builder-trades {
         display: grid;
@@ -86,6 +91,19 @@
     }
     .builder-trades Button {
         height: 300px;
+    }
+
+    .add-job-modal {
+        width: 70%!important;
+        height: 35%;
+
+        
+    }
+
+    .add-job-modal > form {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
     }
 
   }
