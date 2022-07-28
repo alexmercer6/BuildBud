@@ -105,7 +105,6 @@ function AddJobsModal({ formInput, setFormInput, clicked, setClicked }) {
                     <form>
                         <TextField
                             required
-                            id="standard-required"
                             name="lotNumber"
                             label="Lot Number"
                             variant="standard"

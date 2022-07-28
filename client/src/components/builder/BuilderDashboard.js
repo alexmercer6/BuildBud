@@ -16,7 +16,6 @@ function BuilderDashboard() {
         const getAddress = async () => {
             const response = await axios.get(`/api/builder/jobs/${builder_id}`)
             setAddress(response.data)
-            console.log(address)
         }
         getAddress()
     }, [clicked])
