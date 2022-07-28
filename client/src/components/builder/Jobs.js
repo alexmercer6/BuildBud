@@ -24,10 +24,15 @@ import { Box, flexbox } from "@mui/system"
 //     "Hurstville, Lot 117",
 // ]
 
-function Jobs({ data }) {
+function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
     return (
         <div>
-            <AddJobs />
+            <AddJobsModal
+                formInput={formInput}
+                setFormInput={setFormInput}
+                clicked={clicked}
+                setClicked={setClicked}
+            />
             <TextField
                 id="standard-basic"
                 label="Search Jobs"
@@ -51,7 +56,7 @@ function Jobs({ data }) {
     )
 }
 
-function AddJobs() {
+function AddJobsModal({ formInput, setFormInput, clicked, setClicked }) {
     const style = {
         position: "absolute",
         top: "50%",
@@ -64,9 +69,10 @@ function AddJobs() {
         p: 4,
     }
 
-    const [open, setOpen] = useState(false)
+    //temporary placeholder until I add sessions
+    const builder_id = 1
 
-    const [formInput, setFormInput] = useState({})
+    const [open, setOpen] = useState(false)
 
     const handleOpen = () => setOpen(true)
 
@@ -77,12 +83,17 @@ function AddJobs() {
         const newValue = event.target.value
 
         setFormInput({ ...formInput, [name]: newValue })
-        console.log(formInput)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(formInput)
+        axios
+            .post(`/api/builder/jobs/${builder_id}`, formInput)
+            .then((response) => {
+                console.log(response)
+                handleClose()
+                setClicked(!clicked)
+            })
     }
     return (
         <div>

@@ -16,7 +16,7 @@ router.get("/jobs/:id", (req, res) => {
 router.post("/jobs/:id", (req, res) => {
     const builder_id = req.params.id
     const addressObj = req.body
-    const address = `${addressObj.suburb}, ${addressObj.lotNumber} ${addressObj.street}, ${addressObj.city}, ${addressObj.postcode}`
+    const address = `${addressObj.suburb}, ${addressObj.lotNumber} ${addressObj.streetName}, ${addressObj.city}, ${addressObj.postcode}`
     console.log(address)
 
     const sql = `
