@@ -27,6 +27,11 @@ import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
     const [parent] = useAutoAnimate(/* optional config */)
+
+    const deleteJob = async (id) => {
+        const response = await axios.delete(`/api/builder/jobs/${id}`)
+        console.log(response)
+    }
     return (
         <div>
             <AddJobsModal
@@ -48,7 +53,11 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                             <ListItemButton href="/builder-dashboard/trades">
                                 <HouseIcon />
                                 <ListItemText>{house.address}</ListItemText>
-                                <DeleteIcon />
+                                <DeleteIcon
+                                    onClick={() => {
+                                        deleteJob(house.job_id)
+                                    }}
+                                />
                             </ListItemButton>
                         </List>
                     )
