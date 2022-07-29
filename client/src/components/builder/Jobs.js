@@ -15,7 +15,8 @@ import AddBusinessIcon from "@mui/icons-material/AddBusiness"
 
 import axios from "axios"
 import { useState } from "react"
-import { Box, flexbox } from "@mui/system"
+import { Box } from "@mui/system"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 // const data = [
 //     "Riverstone, Lot 112",
@@ -25,6 +26,7 @@ import { Box, flexbox } from "@mui/system"
 // ]
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
+    const [parent] = useAutoAnimate(/* optional config */)
     return (
         <div>
             <AddJobsModal
@@ -39,7 +41,7 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                 variant="standard"
                 fullWidth={true}
             />
-            <div className="listContainer">
+            <div className="listContainer" ref={parent}>
                 {data.map((house, index) => {
                     return (
                         <List key={index} color="primary">

@@ -27,9 +27,10 @@ function BuilderTrades() {
     return (
         <div className="builder-dashboard">
             <div className="builder-trades">
-                {trades.map((trade) => {
+                {trades.map((trade, index) => {
                     return (
                         <Button
+                            key={index}
                             alt={trade.job}
                             variant="contained"
                             style={buttonStyle}
