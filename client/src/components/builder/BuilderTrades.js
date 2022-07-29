@@ -8,6 +8,16 @@ import Crop75Icon from "@mui/icons-material/Crop75"
 import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import ArchitectureIcon from "@mui/icons-material/Architecture"
 function BuilderTrades() {
+    const trades = [
+        { job: "Bricklayer", icon: <Crop75Icon /> },
+        { job: "Carpenter", icon: <CarpenterIcon /> },
+        { job: "Concretor", icon: <LocalShippingIcon /> },
+        { job: "Electrician", icon: <ElectricalServicesIcon /> },
+        { job: "Plumber", icon: <PlumbingIcon /> },
+        { job: "Drainage Plumber", icon: <PlumbingIcon /> },
+        { job: "Surveyor", icon: <ArchitectureIcon /> },
+        { job: "Tiler", icon: <GridViewIcon /> },
+    ]
     const handleClick = () => {}
 
     const buttonStyle = {
@@ -17,47 +27,19 @@ function BuilderTrades() {
     return (
         <div className="builder-dashboard">
             <div className="builder-trades">
-                <Button
-                    alt="plumber"
-                    variant="contained"
-                    style={buttonStyle}
-                    href="trades/trade"
-                >
-                    <PlumbingIcon />
-                    Plumber
-                </Button>
-                <Button alt="carpenter" variant="contained" style={buttonStyle}>
-                    <CarpenterIcon />
-                    Carpenter
-                </Button>
-                <Button alt="concretor" variant="contained" style={buttonStyle}>
-                    <LocalShippingIcon />
-                    Concretor
-                </Button>
-                <Button
-                    alt="electrician"
-                    variant="contained"
-                    style={buttonStyle}
-                >
-                    <ElectricalServicesIcon />
-                    Electrician
-                </Button>
-                <Button alt="tiler" variant="contained" style={buttonStyle}>
-                    <GridViewIcon />
-                    Tiler
-                </Button>
-                <Button alt="plumber" variant="contained" style={buttonStyle}>
-                    <PlumbingIcon />
-                    Drainage Plumber
-                </Button>
-                <Button alt="plumber" variant="contained" style={buttonStyle}>
-                    <Crop75Icon />
-                    Bricklayer
-                </Button>
-                <Button alt="Surveyor" variant="contained" style={buttonStyle}>
-                    <ArchitectureIcon />
-                    Surveyor
-                </Button>
+                {trades.map((trade) => {
+                    return (
+                        <Button
+                            alt={trade.job}
+                            variant="contained"
+                            style={buttonStyle}
+                            href="trades/trade"
+                        >
+                            {trade.icon}
+                            {trade.job}
+                        </Button>
+                    )
+                })}
             </div>
         </div>
     )
