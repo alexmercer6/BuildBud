@@ -15,7 +15,21 @@ function BuilderDashboard() {
     useEffect(() => {
         const getAddress = async () => {
             const response = await axios.get(`/api/builder/jobs/${builder_id}`)
-            setAddress(response.data)
+            const sorted = response.data.sort((a, b) => {
+                let loweredA = a.address.toLowerCase()
+                let loweredB = b.address.toLowerCase()
+
+                if (loweredA > loweredB) {
+                    return -1
+                }
+
+                if (loweredA < loweredB) {
+                    return 1
+                }
+
+                return 0
+            })
+            setAddress(sorted)
         }
         getAddress()
     }, [clicked])
