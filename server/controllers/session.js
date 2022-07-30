@@ -15,12 +15,13 @@ router.get("/", (request, response) => {
         sessionName: request.session.name,
         sessionId: request.session.userId,
         sessionEmail: request.session.email,
+        sessionRole: request.session.role,
         sessionLoggedIn: request.session.loggedIn,
     })
 })
 
 router.post("/", (request, response) => {
-    let sql = `SELECT name, email, password_hash, user_id FROM users`
+    let sql = `SELECT name, email, password_hash, role, user_id FROM users`
 
     //get email and password from form
     const email = request.body.email
@@ -30,13 +31,15 @@ router.post("/", (request, response) => {
     db.query(sql).then((dbResponse) => {
         for (const user of dbResponse.rows) {
             //if there is a match set the session cookies
+
             if (
                 user.email === email &&
                 isValidPassword(password, user.password_hash)
             ) {
-                request.session.username = user.name
-                request.session.userId = user.id
+                request.session.name = user.name
+                request.session.userId = user.user_id
                 request.session.email = user.email
+                request.session.role = user.role
                 request.session.loggedIn = true
                 response.json({ message: "logged in succesfully" })
                 return

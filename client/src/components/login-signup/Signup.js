@@ -9,8 +9,6 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormControl from "@mui/material/FormControl"
 import FormLabel from "@mui/material/FormLabel"
 
-import Login from "./Login"
-
 function Signup() {
     const [signUpForm, setSignUpForm] = useState({})
 
@@ -28,7 +26,7 @@ function Signup() {
         console.log(response)
     }
     return (
-        <div>
+        <div className="form-container">
             <form className="sign-up-form">
                 <TextField
                     className="form-inputs"
@@ -110,7 +108,6 @@ function Signup() {
                     Sign Up
                 </Button>
             </form>
-            <Login />
         </div>
     )
 }

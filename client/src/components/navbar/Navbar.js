@@ -18,6 +18,8 @@ import HouseIcon from "@mui/icons-material/House"
 import Link from "@mui/material/Link"
 
 import { useState } from "react"
+import { Button } from "@mui/material"
+import axios from "axios"
 
 export default function Navbar() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
@@ -35,6 +37,11 @@ export default function Navbar() {
     const handleMobileMenuOpen = (event) => {
         setIsMobileMenuOpen(true)
         setMobileMoreAnchorEl(event.currentTarget)
+    }
+
+    const handleLogout = async () => {
+        const response = await axios.delete("/api/session")
+        console.log(response)
     }
 
     const mobileMenuId = "primary-search-account-menu-mobile"
@@ -85,6 +92,9 @@ export default function Navbar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color="primary">
                 <Toolbar>
+                    <Button variant="standard" onClick={handleLogout}>
+                        Log out
+                    </Button>
                     <IconButton
                         variant="link"
                         size="large"

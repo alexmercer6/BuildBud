@@ -1,10 +1,13 @@
 import React from "react"
 
 import { Button, TextField } from "@mui/material"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { UserContext } from "../../UserContext"
 import axios from "axios"
 
 function Login() {
+    const user = useContext(UserContext)
+    console.log(user)
     const [logInForm, setLogInForm] = useState({})
 
     const handleInput = (event) => {
@@ -20,7 +23,7 @@ function Login() {
         console.log(response)
     }
     return (
-        <div>
+        <div className="form-container">
             <form className="log-in-form">
                 <TextField
                     className="form-inputs"

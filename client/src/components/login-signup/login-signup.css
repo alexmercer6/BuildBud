@@ -1,11 +1,47 @@
+
 .sign-up-form, .log-in-form {
     margin: auto;
     display: grid;
     grid-template-columns: 1fr;
-    max-width: 800px;
+    width: 600px;
     
 }
 
 .form-inputs {
-    margin: 20px;
+    margin: 10px !important;
 }
+
+.form-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+/* breakpoints */
+
+@media screen and (max-width: 1200px) {
+
+
+  }
+  @media screen and (max-width: 1024px) {
+
+  }
+  @media screen and (max-width: 768px) {
+    .sign-up-form, .log-in-form {
+        width: 400px;
+    }
+   
+  }
+
+  @media screen and (max-width: 480px) {
+    .sign-up-form, .log-in-form {
+        width: 350px;
+        
+    }
+    .form-container {
+        align-items: flex-start!important;
+    }
+
+  }
+
