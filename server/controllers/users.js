@@ -3,35 +3,23 @@ const bcrypt = require("bcrypt")
 const db = require("../db/database.js")
 const router = express.Router()
 
-router.post("/:accountType", (request, response) => {
+router.post("/", (request, response) => {
     //check if user trade of builder
-    let sqlEmail = ``
-    let sql = ``
-    const accountType = request.params.accountType
-    console.log(accountType)
-    if (accountType === "builder") {
-        sqlEmail = `
-    SELECT email FROM builders
+    let sqlEmail = `
+        SELECT email FROM users 
     `
-        sql = `
-    INSERT INTO builders (name, email, password_hash) 
-    VALUES ($1, $2, $3)
+    let sql = `
+        INSERT INTO users (name, email, phone_number, role, password_hash) VALUES ($1, $2, $3, $4, $5)
     `
-    } else {
-        sqlEmail = `
-    SELECT email FROM trades
-    `
-        sql = `
-    INSERT INTO trades (name, email, password_hash) 
-    VALUES ($1, $2, $3)
-    `
-    }
 
     //recieves form data from frontend
     const name = request.body.name
     const email = request.body.email
+    const phoneNumber = request.body.phoneNumber
+    const role = request.body.role
     const password = request.body.password
     const checkPassword = request.body.checkPassword
+
     // const checkPassWordCharacters = /^[a-zA-Z0-9~_&*%@$]+$/
 
     //creates the hashed password to store
@@ -85,7 +73,7 @@ router.post("/:accountType", (request, response) => {
             //adds user to database if successful
             const password_hash = generateHash(password)
 
-            db.query(sql, [name, email, password_hash])
+            db.query(sql, [name, email, phoneNumber, role, password_hash])
                 .then((dbResponse) => {
                     response.json({ success: true })
                 })
@@ -93,6 +81,7 @@ router.post("/:accountType", (request, response) => {
                     response.status(500).json({
                         success: false,
                         message: "Unknown server error",
+                        error: reason,
                     })
                 })
         }

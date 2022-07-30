@@ -1,6 +1,3 @@
-import React from "react"
-import "./Builder.css"
-
 import {
     TextField,
     List,
@@ -90,7 +87,7 @@ function AddJobsModal({ formInput, setFormInput, clicked, setClicked }) {
     }
 
     //temporary placeholder until I add sessions
-    const builder_id = 1
+    const trade_id = 1
 
     const [open, setOpen] = useState(false)
 
@@ -108,7 +105,7 @@ function AddJobsModal({ formInput, setFormInput, clicked, setClicked }) {
     const handleSubmit = (event) => {
         event.preventDefault()
         axios
-            .post(`/api/builder/jobs/${builder_id}`, formInput)
+            .post(`/api/trade/jobs/${builder_id}`, formInput)
             .then((response) => {
                 console.log(response)
                 handleClose()

@@ -36,17 +36,13 @@ function BuilderDashboard() {
 
     return (
         <div className="builder-dashboard">
-            {address.length > 0 ? (
-                <Jobs
-                    data={address}
-                    formInput={formInput}
-                    setFormInput={setFormInput}
-                    clicked={clicked}
-                    setClicked={setClicked}
-                />
-            ) : (
-                <CircularProgress color="secondary" />
-            )}
+            <Jobs
+                data={address}
+                formInput={formInput}
+                setFormInput={setFormInput}
+                clicked={clicked}
+                setClicked={setClicked}
+            />
         </div>
     )
 }
