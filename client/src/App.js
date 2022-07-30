@@ -49,7 +49,13 @@ function App() {
                         />
                         <Route
                             path="builder-dashboard/trades/trade"
-                            element={<BuilderTrade />}
+                            element={
+                                user.loggedIn ? (
+                                    <BuilderTrade />
+                                ) : (
+                                    <Navigate replace to="/login" />
+                                )
+                            }
                         />
                     </Routes>
                 </UserContext.Provider>
