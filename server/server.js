@@ -13,7 +13,7 @@ const port = 4000
 const sessionController = require("./controllers/session")
 const usersController = require("./controllers/users")
 const builderController = require("./controllers/builder")
-
+const tradeController = require("./controllers/trade")
 //set session
 app.use(
     expressSession({
@@ -32,6 +32,7 @@ app.use(express.json())
 app.use("/api/session", sessionController)
 app.use("/api/users", usersController)
 app.use("/api/builder", builderController)
+app.use("/api/trade", tradeController)
 
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`)
