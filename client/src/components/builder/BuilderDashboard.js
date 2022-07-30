@@ -20,11 +20,11 @@ function BuilderDashboard() {
                 let loweredB = b.address.toLowerCase()
 
                 if (loweredA > loweredB) {
-                    return -1
+                    return 1
                 }
 
                 if (loweredA < loweredB) {
-                    return 1
+                    return -1
                 }
 
                 return 0
