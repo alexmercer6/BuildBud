@@ -1,9 +1,11 @@
+DROP TABLE IF EXISTS connections;
 DROP TABLE IF EXISTS assigned_jobs;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS materials;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS builders;
 DROP TABLE IF EXISTS trades;
+
 
 CREATE TABLE builders (
     builder_id SERIAL PRIMARY KEY,
@@ -46,6 +48,15 @@ CREATE TABLE materials (
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
     read BOOLEAN,
+    trade_id INTEGER REFERENCES trades(trade_id),
+    builder_id INTEGER REFERENCES builders(builder_id)
+);
+
+-- many to many
+-- SELECT trade_id FROM connections WHERE builder_id = $1
+-- also reversed
+CREATE TABLE connections (
+    connections_id SERIAL PRIMARY KEY,
     trade_id INTEGER REFERENCES trades(trade_id),
     builder_id INTEGER REFERENCES builders(builder_id)
 );
