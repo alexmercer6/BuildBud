@@ -4,6 +4,8 @@ import BuilderDashboard from "./components/builder/BuilderDashboard"
 import Navbar from "./components/navbar/Navbar"
 import BuilderTrades from "./components/builder/BuilderTrades"
 import BuilderTrade from "./components/builder/BuilderTrade"
+import SignUp from "./components/login-signup/SignUp"
+import Login from "./components/login-signup/Login"
 
 function App() {
     return (
@@ -11,7 +13,8 @@ function App() {
             <BrowserRouter>
                 <Navbar />
                 <Routes>
-                    <Route path="/" element="Home" />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/login" element={<Login />} />
                     <Route
                         path="builder-dashboard"
                         element={<BuilderDashboard />}

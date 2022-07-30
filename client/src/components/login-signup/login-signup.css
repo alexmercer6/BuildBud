@@ -1,0 +1,11 @@
+.sign-up-form, .log-in-form {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    
+}
+
+.form-inputs {
+    margin: 20px;
+}

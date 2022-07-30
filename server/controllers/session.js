@@ -19,18 +19,9 @@ router.get("/", (request, response) => {
     })
 })
 
-router.post("/:accountType", (request, response) => {
-    const accountType = request.params.accountType
-    let sql = ``
-    if (accountType === "builder") {
-        sql = `
-        SELECT name, email, password_hash, builder_id FROM builders
-    `
-    } else {
-        sql = `
-        SELECT name, email, password_hash, trade_id FROM trades
-    `
-    }
+router.post("/", (request, response) => {
+    let sql = `SELECT name, email, password_hash, user_id FROM users`
+
     //get email and password from form
     const email = request.body.email
     const password = request.body.password
@@ -43,7 +34,7 @@ router.post("/:accountType", (request, response) => {
                 user.email === email &&
                 isValidPassword(password, user.password_hash)
             ) {
-                request.session.username = user.username
+                request.session.username = user.name
                 request.session.userId = user.id
                 request.session.email = user.email
                 request.session.loggedIn = true
