@@ -45,6 +45,7 @@ CREATE TABLE assigned_jobs (
 CREATE TABLE materials (
     material_id SERIAL PRIMARY KEY,
     material TEXT,
+    qty VARCHAR(255),
     job_id INTEGER REFERENCES jobs(job_id),
     user_id INTEGER REFERENCES users(user_id)
 );

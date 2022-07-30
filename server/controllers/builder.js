@@ -42,4 +42,23 @@ router.delete("/jobs/:job_id/user/:user_id", (req, res) => {
     })
 })
 
+//retrieve material sent by trade for specific job
+router.get("/materials/user/:user_id/job/:job_id", (req, res) => {
+    const job_id = req.params.job_id
+    const user_id = req.params.user_id
+    const sql = `
+        SELECT material, qty FROM materials WHERE job_id = $1 AND user_id = $2
+    `
+
+    db.query(sql, [job_id, user_id])
+        .then((dbResponse) => {
+            res.status(200)
+            res.json(dbResponse)
+        })
+        .catch((error) => {
+            res.status(400)
+            res.json(error)
+        })
+})
+
 module.exports = router
