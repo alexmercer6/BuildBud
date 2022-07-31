@@ -6,7 +6,7 @@ import { UserContext } from "../../UserContext"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-function Login() {
+function Login({ logout, setLogout }) {
     const { user, setUser } = useContext(UserContext)
     const navigate = useNavigate()
 
@@ -22,7 +22,8 @@ function Login() {
     const logInUser = async (data) => {
         const response = await axios.post("/api/session", data)
         setUser(response.data)
-        navigate(`/builder-dashboard/${user.sessionId}`)
+        setLogout(!logout)
+        navigate("/builder-dashboard")
     }
     return (
         <div className="form-container">

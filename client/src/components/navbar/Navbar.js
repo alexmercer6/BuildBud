@@ -21,9 +21,8 @@ import axios from "axios"
 import { UserContext } from "../../UserContext"
 import { useNavigate } from "react-router-dom"
 
-export default function Navbar() {
+export default function Navbar({ logout, setLogout }) {
     const { user, setValue } = useContext(UserContext)
-    const [loginState, setLoginState] = useState("Log In")
     const navigate = useNavigate()
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
@@ -44,10 +43,9 @@ export default function Navbar() {
     }
 
     const handleLogout = async (event) => {
-        event.preventDefault()
         const response = await axios.delete("/api/session")
-        console.log(response)
-        setLoginState("Log In")
+        navigate("/")
+        setLogout(!logout)
     }
 
     const redirectTo = (location, event) => {
@@ -126,10 +124,7 @@ export default function Navbar() {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={(event) => {
-                            redirectTo(
-                                `/builder-dashboard/${user.sessionId}`,
-                                event
-                            )
+                            redirectTo("/builder-dashboard", event)
                         }}
                     >
                         <HouseIcon />
