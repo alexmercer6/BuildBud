@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 
 function App() {
     const [user, setUser] = useState({})
+    const [logout, setLogout] = useState(false)
 
     useEffect(() => {
         const getUser = async () => {
@@ -20,13 +21,13 @@ function App() {
             console.log("set state")
         }
         getUser()
-    }, [])
+    }, [logout])
 
     return (
         <div className="App">
             <BrowserRouter>
                 <UserContext.Provider value={{ user, setUser }}>
-                    <Navbar />
+                    <Navbar logout={logout} setLogout={setLogout} />
                     {console.log(user)}
                     {user.sessionLoggedIn ? (
                         <p>{user.sessionName} hi</p>
@@ -36,10 +37,15 @@ function App() {
 
                     <Routes>
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route
+                            path="/login"
+                            element={
+                                <Login logout={logout} setLogout={setLogout} />
+                            }
+                        />
                         <Route path="/" element="Home" />
                         <Route
-                            path="builder-dashboard/:user_id"
+                            path="builder-dashboard"
                             element={<BuilderDashboard />}
                         />
                         <Route
