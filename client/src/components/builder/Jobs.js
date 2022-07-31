@@ -19,6 +19,7 @@ import { useState } from "react"
 import { Box } from "@mui/system"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import BuilderTrades from "./BuilderTrades"
+import { useNavigate } from "react-router-dom"
 
 // const data = [
 //     "Riverstone, Lot 112",
@@ -29,6 +30,12 @@ import BuilderTrades from "./BuilderTrades"
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
     const [parent] = useAutoAnimate(/* optional config */)
+    const navigate = useNavigate()
+
+    const redirectTo = (location, event) => {
+        event.preventDefault()
+        navigate(location)
+    }
 
     const deleteJob = async (id, event) => {
         const response = await axios.delete(`/api/builder/jobs/${id}`)
@@ -56,7 +63,12 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                         <List key={index} color="primary">
                             <ListItemButton
                                 variant="link"
-                                href="/builder-dashboard/trades"
+                                onClick={(event) => {
+                                    redirectTo(
+                                        "/builder-dashboard/trades",
+                                        event
+                                    )
+                                }}
                             >
                                 <HouseIcon />
                                 <ListItemText>{house.address}</ListItemText>

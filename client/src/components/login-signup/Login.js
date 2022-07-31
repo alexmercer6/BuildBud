@@ -4,10 +4,12 @@ import { Button, TextField } from "@mui/material"
 import { useState, useContext } from "react"
 import { UserContext } from "../../UserContext"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
-    const user = useContext(UserContext)
-    console.log(user)
+    const { user, setUser } = useContext(UserContext)
+    const navigate = useNavigate()
+
     const [logInForm, setLogInForm] = useState({})
 
     const handleInput = (event) => {
@@ -20,7 +22,8 @@ function Login() {
 
     const logInUser = async (data) => {
         const response = await axios.post("/api/session", data)
-        console.log(response)
+        setUser(response.data)
+        navigate("/builder-dashboard")
     }
     return (
         <div className="form-container">

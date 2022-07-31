@@ -11,49 +11,56 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 function App() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({ sessionLoggedIn: false })
+    const redirect = user.sessionLoggedIn
+
+    console.log("first")
     useEffect(() => {
         const getUser = async () => {
             const response = await axios.get("/api/session")
             setUser(response.data)
+            console.log("set state")
         }
         getUser()
     }, [])
+    console.log("second")
     return (
         <div className="App">
             <BrowserRouter>
-                <Navbar />
-                <UserContext.Provider value={user}>
+                <UserContext.Provider value={{ user, setUser }}>
+                    {console.log(user)}
+                    <Navbar />
+
                     <Routes>
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/login" element={<Login />} />
                         <Route
                             path="builder-dashboard"
                             element={
-                                user.loggedIn ? (
+                                redirect ? (
                                     <BuilderDashboard />
                                 ) : (
-                                    <Navigate replace to="/login" />
+                                    <Navigate to="/login" />
                                 )
                             }
                         />
                         <Route
                             path="builder-dashboard/trades"
                             element={
-                                user.loggedIn ? (
+                                user.sessionLoggedIn ? (
                                     <BuilderTrades />
                                 ) : (
-                                    <Navigate replace to="/login" />
+                                    <Navigate to="/login" />
                                 )
                             }
                         />
                         <Route
                             path="builder-dashboard/trades/trade"
                             element={
-                                user.loggedIn ? (
+                                user.sessionLoggedIn ? (
                                     <BuilderTrade />
                                 ) : (
-                                    <Navigate replace to="/login" />
+                                    <Navigate to="/login" />
                                 )
                             }
                         />

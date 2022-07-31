@@ -7,7 +7,15 @@ import GridViewIcon from "@mui/icons-material/GridView"
 import Crop75Icon from "@mui/icons-material/Crop75"
 import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import ArchitectureIcon from "@mui/icons-material/Architecture"
+
+import { useNavigate } from "react-router-dom"
 function BuilderTrades() {
+    const navigate = useNavigate()
+
+    const redirectTo = (location, event) => {
+        event.preventDefault()
+        navigate(location)
+    }
     const trades = [
         { job: "Bricklayer", icon: <Crop75Icon /> },
         { job: "Carpenter", icon: <CarpenterIcon /> },
@@ -34,7 +42,12 @@ function BuilderTrades() {
                             alt={trade.job}
                             variant="contained"
                             style={buttonStyle}
-                            href="trades/trade"
+                            onClick={(event) => {
+                                redirectTo(
+                                    "/builder-dashboard/trades/trade",
+                                    event
+                                )
+                            }}
                         >
                             {trade.icon}
                             {trade.job}

@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar"
 import { red } from "@mui/material/colors"
 import { List, ListItem, ListItemText, Checkbox } from "@mui/material"
+
 function BuilderTrade() {
     const trade = {
         name: "Alex Mercer",

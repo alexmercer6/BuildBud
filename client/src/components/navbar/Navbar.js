@@ -15,13 +15,16 @@ import NotificationsIcon from "@mui/icons-material/Notifications"
 import MenuIcon from "@mui/icons-material/Menu"
 import HouseIcon from "@mui/icons-material/House"
 
-import Link from "@mui/material/Link"
-
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Button } from "@mui/material"
 import axios from "axios"
+import { UserContext } from "../../UserContext"
+import { useNavigate } from "react-router-dom"
 
 export default function Navbar() {
+    const { user, setValue } = useContext(UserContext)
+    const navigate = useNavigate()
+
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [unreadMessages, setUnreadMessages] = useState(0)
@@ -42,6 +45,11 @@ export default function Navbar() {
     const handleLogout = async () => {
         const response = await axios.delete("/api/session")
         console.log(response)
+    }
+
+    const redirectTo = (location, event) => {
+        event.preventDefault()
+        navigate(location)
     }
 
     const mobileMenuId = "primary-search-account-menu-mobile"
@@ -92,9 +100,21 @@ export default function Navbar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color="primary">
                 <Toolbar>
-                    <Button variant="standard" onClick={handleLogout}>
-                        Log out
-                    </Button>
+                    {user.sessionLoggedIn ? (
+                        <Button variant="standard" onClick={handleLogout}>
+                            Log out
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="standard"
+                            onClick={(event) => {
+                                redirectTo("/login", event)
+                            }}
+                        >
+                            Log In
+                        </Button>
+                    )}
+
                     <IconButton
                         variant="link"
                         size="large"
@@ -102,7 +122,9 @@ export default function Navbar() {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
-                        href="/builder-dashboard"
+                        onClick={(event) => {
+                            redirectTo("/builder-dashboard", event)
+                        }}
                     >
                         <HouseIcon />
                     </IconButton>

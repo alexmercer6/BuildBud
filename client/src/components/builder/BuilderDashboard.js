@@ -1,12 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Jobs from "./Jobs"
 import { CircularProgress } from "@mui/material"
+import { UserContext } from "../../UserContext"
 
 function BuilderDashboard() {
     //temporary until I set up proper log in
     const builder_id = 1
+
+    const { user, setUser } = useContext(UserContext)
+    console.log(user, "dashboard")
 
     const [address, setAddress] = useState([])
     const [formInput, setFormInput] = useState({})
