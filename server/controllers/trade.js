@@ -4,16 +4,17 @@ const router = express.Router()
 
 //send need materials to db for builder to retrieve
 
-router.post("/materials/user/:user_id/job/:job_id", (req, res) => {
+router.post("/materials/user/:user_id/job/:job_id/:trade", (req, res) => {
     const job_id = req.params.job_id
     const user_id = req.params.user_id
     const material = req.body.material
     const qty = req.body.qty
+    const trade = req.params.trade
     const sql = `
-        INSERT INTO materials (material, qty, job_id, user_id) VALUES ($1, $2, $3, $4)
+        INSERT INTO materials (material, qty, trade, job_id, user_id) VALUES ($1, $2, $3, $4, $5)
     `
-    console.log(material, qty, user_id, job_id)
-    db.query(sql, [material, qty, job_id, user_id])
+
+    db.query(sql, [material, qty, trade, job_id, user_id])
         .then((dbResponse) => {
             res.status(200)
             res.json({ success: true })

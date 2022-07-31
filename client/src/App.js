@@ -47,7 +47,7 @@ function App() {
                             element={<BuilderTrades />}
                         />
                         <Route
-                            path="builder-dashboard/:user_id/job/:job_id/trade/:trade_id"
+                            path="builder-dashboard/:user_id/job/:job_id/:trade"
                             element={<BuilderTrade />}
                         />
                     </Routes>

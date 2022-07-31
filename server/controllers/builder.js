@@ -43,17 +43,20 @@ router.delete("/jobs/:job_id/user/:user_id", (req, res) => {
 })
 
 //retrieve material sent by trade for specific job
-router.get("/materials/user/:user_id/job/:job_id", (req, res) => {
+router.get("/materials/user/:user_id/job/:job_id/:trade", (req, res) => {
     const job_id = req.params.job_id
     const user_id = req.params.user_id
+    const trade = req.params.trade
+    console.log(trade)
     const sql = `
-        SELECT material, qty FROM materials WHERE job_id = $1 AND user_id = $2
+        SELECT material, qty, trade FROM materials WHERE job_id = $1 AND user_id = $2 AND trade = $3
     `
 
-    db.query(sql, [job_id, user_id])
+    db.query(sql, [job_id, user_id, trade])
         .then((dbResponse) => {
+            console.log(dbResponse.rows)
             res.status(200)
-            res.json(dbResponse)
+            res.json(dbResponse.rows)
         })
         .catch((error) => {
             res.status(400)
