@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Jobs from "./Jobs"
-import { CircularProgress } from "@mui/material"
+
 import { UserContext } from "../../UserContext"
 
 function BuilderDashboard() {
@@ -10,7 +10,6 @@ function BuilderDashboard() {
     const builder_id = 1
 
     const { user, setUser } = useContext(UserContext)
-    console.log(user, "dashboard")
 
     const [address, setAddress] = useState([])
     const [formInput, setFormInput] = useState({})

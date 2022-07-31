@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import "./Builder.css"
 
 import {
@@ -20,6 +20,7 @@ import { Box } from "@mui/system"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import BuilderTrades from "./BuilderTrades"
 import { useNavigate } from "react-router-dom"
+import { UserContext } from "../../UserContext"
 
 // const data = [
 //     "Riverstone, Lot 112",
@@ -29,6 +30,7 @@ import { useNavigate } from "react-router-dom"
 // ]
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
+    const { user, setUser } = useContext(UserContext)
     const [parent] = useAutoAnimate(/* optional config */)
     const navigate = useNavigate()
 
@@ -65,7 +67,7 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                                 variant="link"
                                 onClick={(event) => {
                                     redirectTo(
-                                        "/builder-dashboard/trades",
+                                        `/builder-dashboard/${user.sessionId}/job/${house.job_id}`,
                                         event
                                     )
                                 }}

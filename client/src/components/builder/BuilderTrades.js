@@ -8,14 +8,23 @@ import Crop75Icon from "@mui/icons-material/Crop75"
 import LocalShippingIcon from "@mui/icons-material/LocalShipping"
 import ArchitectureIcon from "@mui/icons-material/Architecture"
 
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "../../UserContext"
 function BuilderTrades() {
+    const { user, setUser } = useContext(UserContext)
+    const params = useParams()
     const navigate = useNavigate()
 
     const redirectTo = (location, event) => {
         event.preventDefault()
         navigate(location)
     }
+
+    //temporary placeholder
+    const trade_id = 2
+    const job_id = params.job_id
+
     const trades = [
         { job: "Bricklayer", icon: <Crop75Icon /> },
         { job: "Carpenter", icon: <CarpenterIcon /> },
@@ -44,7 +53,7 @@ function BuilderTrades() {
                             style={buttonStyle}
                             onClick={(event) => {
                                 redirectTo(
-                                    "/builder-dashboard/trades/trade",
+                                    `/builder-dashboard/${user.sessionId}/job/${job_id}/trade/${trade_id}`,
                                     event
                                 )
                             }}

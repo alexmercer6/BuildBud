@@ -17,13 +17,12 @@ function Login() {
         const newValue = event.target.value
 
         setLogInForm({ ...logInForm, [name]: newValue })
-        console.log(logInForm)
     }
 
     const logInUser = async (data) => {
         const response = await axios.post("/api/session", data)
         setUser(response.data)
-        navigate("/builder-dashboard")
+        navigate(`/builder-dashboard/${user.sessionId}`)
     }
     return (
         <div className="form-container">
@@ -53,7 +52,7 @@ function Login() {
                     className="form-inputs"
                     variant="contained"
                     onClick={(event) => {
-                        event.preventDefault()
+                        // event.preventDefault()
                         logInUser(logInForm)
                     }}
                 >
