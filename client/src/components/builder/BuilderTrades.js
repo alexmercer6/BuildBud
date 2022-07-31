@@ -53,7 +53,9 @@ function BuilderTrades() {
                             style={buttonStyle}
                             onClick={(event) => {
                                 redirectTo(
-                                    `/builder-dashboard/${user.sessionId}/job/${job_id}/trade/${trade_id}`,
+                                    `/builder-dashboard/${
+                                        user.sessionId
+                                    }/job/${job_id}/${trade.job.toLowerCase()}`,
                                     event
                                 )
                             }}

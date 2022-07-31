@@ -1,8 +1,35 @@
 import Avatar from "@mui/material/Avatar"
 import { red } from "@mui/material/colors"
-import { List, ListItem, ListItemText, Checkbox } from "@mui/material"
+import {
+    List,
+    ListItem,
+    ListItemText,
+    Checkbox,
+    TextField,
+    Button,
+} from "@mui/material"
+import { useContext, useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { UserContext } from "../../UserContext"
+import axios from "axios"
 
 function BuilderTrade() {
+    const { user, setUser } = useContext(UserContext)
+    const [materials, setMaterials] = useState({})
+    const [formInput, setFormInput] = useState({})
+    const [submitted, setSubmitted] = useState(false)
+    const params = useParams()
+    console.log(params.trade)
+    useEffect(() => {
+        const getMaterials = async () => {
+            const response = await axios.get(
+                `/api/builder/materials/user/${user.sessionId}/job/${params.job_id}/${params.trade}`
+            )
+
+            setMaterials(response.data)
+        }
+        getMaterials()
+    }, [user, submitted])
     const trade = {
         name: "Alex Mercer",
         job: "Bricklayer",
@@ -10,10 +37,27 @@ function BuilderTrade() {
         email: "alex@test.com",
     }
 
-    const materials = [
-        { material: "Sand", qty: "1 tonne" },
-        { material: "Flashing", qty: "5" },
-    ]
+    const addMaterials = async (data, event) => {
+        event.preventDefault()
+        const response = await axios.post(
+            `/api/trade/materials/user/${user.sessionId}/job/${params.job_id}/${params.trade}`,
+            data
+        )
+
+        setSubmitted(!submitted)
+    }
+
+    const handleInput = (event) => {
+        const name = event.target.name
+        const newValue = event.target.value
+
+        setFormInput({ ...formInput, [name]: newValue })
+    }
+
+    // const materials = [
+    //     { material: "Sand", qty: "1 tonne" },
+    //     { material: "Flashing", qty: "5" },
+    // ]
     return (
         <div className="builder-trade">
             <div className="builder-trade-heading">
@@ -23,6 +67,33 @@ function BuilderTrade() {
                 <h1>{trade.name}</h1>
             </div>
             <p>{trade.job}</p>
+            <h1>Add Materials:</h1>
+            <form>
+                <TextField
+                    required
+                    label="Material"
+                    name="material"
+                    onChange={(event) => {
+                        handleInput(event)
+                    }}
+                />
+                <TextField
+                    required
+                    label="Quantity"
+                    name="qty"
+                    onChange={(event) => {
+                        handleInput(event)
+                    }}
+                />
+                <Button
+                    variant="contained"
+                    onClick={(event) => {
+                        addMaterials(formInput, event)
+                    }}
+                >
+                    Add Materials
+                </Button>
+            </form>
 
             <List
                 dense
@@ -33,26 +104,30 @@ function BuilderTrade() {
                 }}
             >
                 <h1>Materials needed:</h1>
-                {materials.map((material, index) => {
-                    return (
-                        <ListItem
-                            key={index}
-                            secondaryAction={
-                                <Checkbox
-                                    edge="end"
-                                    // onChange={handleToggle(value)}
-                                    // checked={checked.indexOf(value) !== -1}
-                                    // inputProps={{ "aria-labelledby": labelId }}
+                {materials.length > 0 ? (
+                    materials.map((material, index) => {
+                        return (
+                            <ListItem
+                                key={index}
+                                secondaryAction={
+                                    <Checkbox
+                                        edge="end"
+                                        // onChange={handleToggle(value)}
+                                        // checked={checked.indexOf(value) !== -1}
+                                        // inputProps={{ "aria-labelledby": labelId }}
+                                    />
+                                }
+                            >
+                                <ListItemText
+                                    primary={material.material}
+                                    secondary={material.qty}
                                 />
-                            }
-                        >
-                            <ListItemText
-                                primary={material.material}
-                                secondary={material.qty}
-                            />
-                        </ListItem>
-                    )
-                })}
+                            </ListItem>
+                        )
+                    })
+                ) : (
+                    <p>No materials needed</p>
+                )}
             </List>
         </div>
     )
