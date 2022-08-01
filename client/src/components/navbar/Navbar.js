@@ -15,14 +15,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications"
 import MenuIcon from "@mui/icons-material/Menu"
 import HouseIcon from "@mui/icons-material/House"
 
-import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { Button } from "@mui/material"
 import axios from "axios"
-import { UserContext } from "../../UserContext"
-import { useNavigate } from "react-router-dom"
 
-export default function Navbar({ logout, setLogout }) {
-    const { user, setValue } = useContext(UserContext)
+export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
     const navigate = useNavigate()
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
@@ -45,7 +43,7 @@ export default function Navbar({ logout, setLogout }) {
     const handleLogout = async (event) => {
         const response = await axios.delete("/api/session")
         navigate("/")
-        setLogout(!logout)
+        setIsLoggedIn(false)
     }
 
     const redirectTo = (location, event) => {
@@ -101,7 +99,7 @@ export default function Navbar({ logout, setLogout }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color="primary">
                 <Toolbar>
-                    {user.sessionLoggedIn ? (
+                    {isLoggedIn ? (
                         <Button variant="standard" onClick={handleLogout}>
                             Log out
                         </Button>

@@ -19,9 +19,8 @@ router.get("/", (request, response) => {
             sessionRole: request.session.role,
             sessionLoggedIn: request.session.loggedIn,
         })
-    } else {
-        response.json({ sessionLoggedIn: false })
     }
+    console.log(request.session)
 })
 
 router.post("/", (request, response) => {

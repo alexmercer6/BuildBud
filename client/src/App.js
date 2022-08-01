@@ -1,60 +1,83 @@
 import "./App.css"
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
-import BuilderDashboard from "./components/builder/BuilderDashboard"
-import Navbar from "./components/navbar/Navbar"
-import BuilderTrades from "./components/builder/BuilderTrades"
-import BuilderTrade from "./components/builder/BuilderTrade"
-import SignUp from "./components/login-signup/SignUp"
-import Login from "./components/login-signup/Login"
-import { UserContext } from "./UserContext"
 import axios from "axios"
+import { UserContext } from "./UserContext"
 import { useEffect, useState } from "react"
+import Navbar from "./components/navbar/Navbar"
+import Login from "./components/login-signup/Login"
+import SignUp from "./components/login-signup/SignUp"
+import BuilderTrade from "./components/builder/BuilderTrade"
+import BuilderTrades from "./components/builder/BuilderTrades"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import BuilderDashboard from "./components/builder/BuilderDashboard"
+import ProtectedRoute from "./components/navbar/protectRoute/ProtectedRoute"
 
 function App() {
     const [user, setUser] = useState({})
-    const [logout, setLogout] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    console.log("run start")
 
     useEffect(() => {
         const getUser = async () => {
+            console.log("running")
             const response = await axios.get("/api/session")
-            setUser(response.data)
-            console.log("set state")
+
+            let user = response.data
+            console.log("session", user)
+            setUser(user)
+            if (user.sessionLoggedIn) {
+                setIsLoggedIn(true)
+            }
         }
         getUser()
-    }, [logout])
+    }, [isLoggedIn])
+    console.log("logged in ", isLoggedIn)
 
     return (
         <div className="App">
             <BrowserRouter>
                 <UserContext.Provider value={{ user, setUser }}>
-                    <Navbar logout={logout} setLogout={setLogout} />
-                    {console.log(user)}
-                    {user.sessionLoggedIn ? (
-                        <p>{user.sessionName} hi</p>
-                    ) : (
-                        "no user"
-                    )}
+                    <Navbar
+                        isLoggedIn={isLoggedIn}
+                        setIsLoggedIn={setIsLoggedIn}
+                    />
+                    {console.log("user", user)}
+                    {isLoggedIn ? <p>{user.sessionName} hi</p> : "no user"}
 
                     <Routes>
                         <Route path="/signup" element={<SignUp />} />
                         <Route
                             path="/login"
                             element={
-                                <Login logout={logout} setLogout={setLogout} />
+                                <Login
+                                    isLoggedIn={isLoggedIn}
+                                    setIsLoggedIn={setIsLoggedIn}
+                                />
                             }
                         />
                         <Route path="/" element="Home" />
                         <Route
                             path="builder-dashboard"
-                            element={<BuilderDashboard />}
+                            element={
+                                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                                    <BuilderDashboard />
+                                </ProtectedRoute>
+                            }
                         />
                         <Route
                             path="builder-dashboard/:user_id/job/:job_id"
-                            element={<BuilderTrades />}
+                            element={
+                                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                                    <BuilderTrades />
+                                </ProtectedRoute>
+                            }
                         />
                         <Route
                             path="builder-dashboard/:user_id/job/:job_id/:trade"
-                            element={<BuilderTrade />}
+                            element={
+                                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                                    <BuilderTrade />
+                                </ProtectedRoute>
+                            }
                         />
                     </Routes>
                 </UserContext.Provider>
