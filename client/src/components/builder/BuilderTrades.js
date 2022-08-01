@@ -1,29 +1,27 @@
 import "./Builder.css"
-import { Button } from "@mui/material"
-import PlumbingIcon from "@mui/icons-material/Plumbing"
-import CarpenterIcon from "@mui/icons-material/Carpenter"
-import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices"
-import GridViewIcon from "@mui/icons-material/GridView"
-import Crop75Icon from "@mui/icons-material/Crop75"
-import LocalShippingIcon from "@mui/icons-material/LocalShipping"
-import ArchitectureIcon from "@mui/icons-material/Architecture"
-
-import { useNavigate, useParams } from "react-router-dom"
 import { useContext } from "react"
+import { Button } from "@mui/material"
+import Crop75Icon from "@mui/icons-material/Crop75"
+import PlumbingIcon from "@mui/icons-material/Plumbing"
+import GridViewIcon from "@mui/icons-material/GridView"
+import CarpenterIcon from "@mui/icons-material/Carpenter"
+import { useNavigate, useParams } from "react-router-dom"
+import ArchitectureIcon from "@mui/icons-material/Architecture"
+import LocalShippingIcon from "@mui/icons-material/LocalShipping"
+import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices"
+
 import { UserContext } from "../../UserContext"
 function BuilderTrades() {
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const params = useParams()
     const navigate = useNavigate()
+
+    const job_id = params.job_id
 
     const redirectTo = (location, event) => {
         event.preventDefault()
         navigate(location)
     }
-
-    //temporary placeholder
-    const trade_id = 2
-    const job_id = params.job_id
 
     const trades = [
         { job: "Bricklayer", icon: <Crop75Icon /> },

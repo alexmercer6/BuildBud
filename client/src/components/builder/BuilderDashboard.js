@@ -1,9 +1,7 @@
-import React, { useContext } from "react"
-import { useEffect, useState } from "react"
 import axios from "axios"
 import Jobs from "./Jobs"
-
 import { UserContext } from "../../UserContext"
+import { useEffect, useState, useContext } from "react"
 
 function BuilderDashboard() {
     //temporary until I set up proper log in
