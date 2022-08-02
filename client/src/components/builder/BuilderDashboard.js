@@ -2,6 +2,7 @@ import axios from "axios"
 import Jobs from "./Jobs"
 import { UserContext } from "../../UserContext"
 import { useEffect, useState, useContext } from "react"
+import Connections from "../connections/Connections"
 
 function BuilderDashboard() {
     //temporary until I set up proper log in

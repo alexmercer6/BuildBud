@@ -88,4 +88,41 @@ router.post("/", (request, response) => {
     })
 })
 
+//get users with role of trade
+router.get("/trades", (req, res) => {
+    const user_id = req.session.userId
+    const sql = `
+        SELECT name, email, phone_number, user_id FROM users WHERE role = 'trade' AND user_id <> $1
+    `
+
+    db.query(sql, [user_id])
+        .then((dbResponse) => {
+            res.status(200)
+            res.json(dbResponse.rows)
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error)
+        })
+})
+
+//get users with role of builder
+router.get("/builders", (req, res) => {
+    const user_id = req.session.userId
+
+    const sql = `
+        SELECT name, email, phone_number, user_id FROM users WHERE role = 'builder' AND user_id <> $1
+    `
+
+    db.query(sql, [user_id])
+        .then((dbResponse) => {
+            res.status(200)
+            res.json(dbResponse.rows)
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error)
+        })
+})
+
 module.exports = router
