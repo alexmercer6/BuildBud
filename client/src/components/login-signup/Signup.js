@@ -96,6 +96,16 @@ function Signup() {
                             label="Trade"
                         />
                     </RadioGroup>
+                    {signUpForm.role === "trade" && (
+                        <TextField
+                            className="form-inputs"
+                            label="Job"
+                            name="job"
+                            onChange={(event) => {
+                                handleInput(event)
+                            }}
+                        />
+                    )}
                 </FormControl>
                 <Button
                     className="form-inputs"

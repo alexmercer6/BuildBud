@@ -14,6 +14,8 @@ function Connections() {
     const [builders, setBuilders] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [isBuilderLoading, setIsBuilderLoading] = useState(true)
+    const [connections, setConnections] = useState({})
+    const [isLoadingConnections, setIsLoadingConnections] = useState(true)
 
     const stringToColor = (string) => {
         let hash = 0
@@ -33,7 +35,21 @@ function Connections() {
         return color
     }
 
-    const showNewTrades = (friend) => {
+    const addConnection = async (data) => {
+        setIsLoadingConnections(true)
+        const response = await axios.post("/api/users/addConnection", data)
+        console.log(response.data)
+        setIsLoadingConnections(false)
+    }
+
+    const deleteConnection = async (id) => {
+        setIsLoadingConnections(true)
+        const response = await axios.delete(`/api/users/connection/${id}`)
+        console.log(response.data)
+        setIsLoadingConnections(false)
+    }
+
+    const showNewTrades = (friend, text, func, funcInp) => {
         return (
             <>
                 <ListItem alignItems="flex-start" key={friend.user_id}>
@@ -61,8 +77,15 @@ function Connections() {
                             </Fragment>
                         }
                     />
-                    <Button size="small" variant="outlined">
-                        Add to Connections
+                    <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={(event) => {
+                            event.preventDefault()
+                            func(funcInp)
+                        }}
+                    >
+                        {text} Connections
                     </Button>
                 </ListItem>
                 <Divider variant="inset" component="li" />
@@ -84,9 +107,16 @@ function Connections() {
             setBuilders(response.data)
             setIsBuilderLoading(false)
         }
+        const getConnections = async () => {
+            const response = await axios.get("/api/users/connections")
+            console.log(response, "connect")
+            setConnections(response.data)
+            setIsLoadingConnections(false)
+        }
+        getConnections()
         getBuildersList()
         getTradesList()
-    }, [isLoading])
+    }, [])
     return (
         <div>
             <div>
@@ -104,7 +134,12 @@ function Connections() {
                                     bgcolor: "background.paper",
                                 }}
                             >
-                                {showNewTrades(trade)}
+                                {showNewTrades(
+                                    trade,
+                                    "Add to ",
+                                    addConnection,
+                                    trades
+                                )}
                             </List>
                         )
                     })
@@ -125,7 +160,38 @@ function Connections() {
                                     bgcolor: "background.paper",
                                 }}
                             >
-                                {showNewTrades(builder)}
+                                {showNewTrades(
+                                    builder,
+                                    "Add to ",
+                                    addConnection,
+                                    builders
+                                )}
+                            </List>
+                        )
+                    })
+                )}
+            </div>
+            <div>
+                <h1>Connections</h1>
+                {isLoadingConnections ? (
+                    <p>Loading...</p>
+                ) : (
+                    connections.map((connection, index) => {
+                        return (
+                            <List
+                                key={index}
+                                sx={{
+                                    width: "100%",
+                                    maxWidth: 360,
+                                    bgcolor: "background.paper",
+                                }}
+                            >
+                                {showNewTrades(
+                                    connection,
+                                    "Remove From ",
+                                    deleteConnection,
+                                    connection.connections_id
+                                )}
                             </List>
                         )
                     })

@@ -2,17 +2,24 @@ import axios from "axios"
 import Jobs from "./Jobs"
 import { UserContext } from "../../UserContext"
 import { useEffect, useState, useContext } from "react"
-import Connections from "../connections/Connections"
+import { Button, Link } from "@mui/material"
+import { Navigate, useNavigate } from "react-router-dom"
 
 function BuilderDashboard() {
     //temporary until I set up proper log in
     const builder_id = 1
+    const navigate = useNavigate()
 
     const { user, setUser } = useContext(UserContext)
 
     const [address, setAddress] = useState([])
     const [formInput, setFormInput] = useState({})
     const [clicked, setClicked] = useState(false)
+
+    const redirectTo = (location, event) => {
+        event.preventDefault()
+        navigate(location)
+    }
 
     useEffect(() => {
         const getAddress = async () => {
@@ -38,6 +45,14 @@ function BuilderDashboard() {
 
     return (
         <div className="builder-dashboard">
+            <Button
+                onClick={(event) => {
+                    redirectTo("/connections", event)
+                }}
+            >
+                {" "}
+                Connections
+            </Button>
             <Jobs
                 data={address}
                 formInput={formInput}

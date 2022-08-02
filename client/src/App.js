@@ -77,6 +77,7 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+                        {console.log("check", isLoggedIn)}
                         <Route
                             path="connections"
                             element={

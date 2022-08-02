@@ -11,7 +11,8 @@ CREATE TABLE users (
     email VARCHAR(255),
     phone_number INTEGER,
     password_hash VARCHAR(255),
-    role VARCHAR(255)
+    role VARCHAR(255),
+    job VARCHAR(255)
 );
 -- CREATE TABLE builders (
 --     builder_id SERIAL PRIMARY KEY,
@@ -62,5 +63,11 @@ CREATE TABLE messages (
 -- also reversed
 CREATE TABLE connections (
     connections_id SERIAL PRIMARY KEY,
+    connected_user_id INTEGER,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number INTEGER,
+    role VARCHAR(255),
+    job VARCHAR(255),
     user_id INTEGER REFERENCES users(user_id)
 );
