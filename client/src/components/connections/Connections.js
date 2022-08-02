@@ -50,47 +50,52 @@ function Connections() {
     }
 
     const showNewTrades = (friend, text, func, funcInp) => {
-        return (
-            <>
-                <ListItem alignItems="flex-start" key={friend.user_id}>
-                    <ListItemAvatar key={friend.user_id}>
-                        <Avatar
-                            alt={friend.name}
-                            sx={{
-                                bgcolor: stringToColor(friend.name),
+        if (friend !== null) {
+            return (
+                <>
+                    <ListItem alignItems="flex-start" key={friend.user_id}>
+                        <ListItemAvatar key={friend.user_id}>
+                            <Avatar
+                                alt={friend.name}
+                                sx={{
+                                    bgcolor: stringToColor(friend.name),
+                                }}
+                            >
+                                {friend.name.charAt(0).toUpperCase()}
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={friend.name.toUpperCase()}
+                            secondary={
+                                <Fragment>
+                                    <Typography
+                                        sx={{ display: "inline" }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary"
+                                    ></Typography>
+                                    {friend.job !== null
+                                        ? friend.job
+                                        : friend.email}
+                                </Fragment>
+                            }
+                        />
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            onClick={(event) => {
+                                event.preventDefault()
+                                func(funcInp)
+                                console.log(funcInp)
                             }}
                         >
-                            {friend.name.charAt(0).toUpperCase()}
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={friend.name.toUpperCase()}
-                        secondary={
-                            <Fragment>
-                                <Typography
-                                    sx={{ display: "inline" }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                ></Typography>
-                                {friend.email}
-                            </Fragment>
-                        }
-                    />
-                    <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={(event) => {
-                            event.preventDefault()
-                            func(funcInp)
-                        }}
-                    >
-                        {text} Connections
-                    </Button>
-                </ListItem>
-                <Divider variant="inset" component="li" />
-            </>
-        )
+                            {text} Connections
+                        </Button>
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                </>
+            )
+        }
     }
 
     useEffect(() => {
@@ -116,7 +121,7 @@ function Connections() {
         getConnections()
         getBuildersList()
         getTradesList()
-    }, [])
+    }, [isLoadingConnections])
     return (
         <div>
             <div>
@@ -138,7 +143,7 @@ function Connections() {
                                     trade,
                                     "Add to ",
                                     addConnection,
-                                    trades
+                                    trade
                                 )}
                             </List>
                         )
@@ -164,7 +169,7 @@ function Connections() {
                                     builder,
                                     "Add to ",
                                     addConnection,
-                                    builders
+                                    builder
                                 )}
                             </List>
                         )

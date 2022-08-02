@@ -88,6 +88,10 @@ function Signup() {
                             name="role"
                             control={<Radio />}
                             label="Builder"
+                            // onFocus={() => {
+                            //     console.log("change")
+                            //     setSignUpForm({ ...signUpForm, job: "" })
+                            // }}
                         />
                         <FormControlLabel
                             value="trade"
@@ -100,6 +104,17 @@ function Signup() {
                         <TextField
                             className="form-inputs"
                             label="Job"
+                            name="job"
+                            onChange={(event) => {
+                                handleInput(event)
+                            }}
+                        />
+                    )}
+
+                    {signUpForm.role === "builder" && (
+                        <TextField
+                            className="form-inputs"
+                            label="Company"
                             name="job"
                             onChange={(event) => {
                                 handleInput(event)

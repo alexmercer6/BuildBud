@@ -94,7 +94,7 @@ router.post("/", (request, response) => {
 router.get("/trades", (req, res) => {
     const user_id = req.session.userId
     const sql = `
-        SELECT name, email, phone_number, user_id, job FROM users WHERE role = 'trade' AND user_id <> $1
+        SELECT name, email, phone_number, user_id, job, role FROM users WHERE role = 'trade' AND user_id <> $1
     `
 
     db.query(sql, [user_id])
@@ -113,7 +113,7 @@ router.get("/builders", (req, res) => {
     const user_id = req.session.userId
 
     const sql = `
-        SELECT name, email, phone_number, user_id, job FROM users WHERE role = 'builder' AND user_id <> $1
+        SELECT name, email, phone_number, user_id, job, role FROM users WHERE role = 'builder' AND user_id <> $1
     `
 
     db.query(sql, [user_id])
@@ -147,7 +147,6 @@ router.get("/connections", (req, res) => {
 })
 
 router.post("/addConnection", (req, res) => {
-    console.log(req.body)
     const user_id = req.session.userId
     const connected_user_id = req.body.user_id
     const name = req.body.name
