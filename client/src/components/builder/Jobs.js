@@ -1,6 +1,13 @@
-import React, { useContext } from "react"
 import "./Builder.css"
-
+import axios from "axios"
+import { Box } from "@mui/system"
+import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import { UserContext } from "../../UserContext"
+import HouseIcon from "@mui/icons-material/House"
+import DeleteIcon from "@mui/icons-material/Delete"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
+import AddBusinessIcon from "@mui/icons-material/AddBusiness"
 import {
     TextField,
     List,
@@ -9,28 +16,9 @@ import {
     Button,
     Modal,
 } from "@mui/material"
-// import { FormControl, InputLabel, Input, FormHelperText } from "@mui/material"
-import DeleteIcon from "@mui/icons-material/Delete"
-import HouseIcon from "@mui/icons-material/House"
-import AddBusinessIcon from "@mui/icons-material/AddBusiness"
-
-import axios from "axios"
-import { useState } from "react"
-import { Box } from "@mui/system"
-import { useAutoAnimate } from "@formkit/auto-animate/react"
-import BuilderTrades from "./BuilderTrades"
-import { useNavigate } from "react-router-dom"
-import { UserContext } from "../../UserContext"
-
-// const data = [
-//     "Riverstone, Lot 112",
-//     "Riverstone, Lot 113",
-//     "Apple, Lot 114",
-//     "Hurstville, Lot 117",
-// ]
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const [parent] = useAutoAnimate(/* optional config */)
     const navigate = useNavigate()
 

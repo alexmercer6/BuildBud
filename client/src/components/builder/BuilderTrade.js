@@ -1,5 +1,9 @@
+import axios from "axios"
 import Avatar from "@mui/material/Avatar"
 import { red } from "@mui/material/colors"
+import { useParams } from "react-router-dom"
+import { UserContext } from "../../UserContext"
+import { useContext, useEffect, useState } from "react"
 import {
     List,
     ListItem,
@@ -8,13 +12,9 @@ import {
     TextField,
     Button,
 } from "@mui/material"
-import { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { UserContext } from "../../UserContext"
-import axios from "axios"
 
 function BuilderTrade() {
-    const { user, setUser } = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const [materials, setMaterials] = useState({})
     const [formInput, setFormInput] = useState({})
     const [submitted, setSubmitted] = useState(false)
