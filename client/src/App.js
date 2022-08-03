@@ -10,19 +10,18 @@ import BuilderTrades from "./components/builder/BuilderTrades"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import BuilderDashboard from "./components/builder/BuilderDashboard"
 import ProtectedRoute from "./components/navbar/protectRoute/ProtectedRoute"
+import Connections from "./components/connections/Connections"
 
 function App() {
     const [user, setUser] = useState({})
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    console.log("run start")
 
     useEffect(() => {
         const getUser = async () => {
-            console.log("running")
             const response = await axios.get("/api/session")
 
             let user = response.data
-            console.log("session", user)
+
             setUser(user)
             if (user.sessionLoggedIn) {
                 setIsLoggedIn(true)
@@ -30,7 +29,6 @@ function App() {
         }
         getUser()
     }, [isLoggedIn])
-    console.log("logged in ", isLoggedIn)
 
     return (
         <div className="App">
@@ -40,7 +38,7 @@ function App() {
                         isLoggedIn={isLoggedIn}
                         setIsLoggedIn={setIsLoggedIn}
                     />
-                    {console.log("user", user)}
+
                     {isLoggedIn ? <p>{user.sessionName} hi</p> : "no user"}
 
                     <Routes>
@@ -76,6 +74,15 @@ function App() {
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <BuilderTrade />
+                                </ProtectedRoute>
+                            }
+                        />
+                        {console.log("check", isLoggedIn)}
+                        <Route
+                            path="connections"
+                            element={
+                                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                                    <Connections />
                                 </ProtectedRoute>
                             }
                         />

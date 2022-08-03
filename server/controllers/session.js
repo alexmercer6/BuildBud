@@ -20,7 +20,6 @@ router.get("/", (request, response) => {
             sessionLoggedIn: request.session.loggedIn,
         })
     }
-    console.log(request.session)
 })
 
 router.post("/", (request, response) => {
