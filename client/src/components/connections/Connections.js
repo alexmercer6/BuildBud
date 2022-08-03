@@ -13,9 +13,11 @@ function Connections() {
     const [trades, setTrades] = useState({})
     const [builders, setBuilders] = useState({})
     const [isLoading, setIsLoading] = useState(true)
-    const [isBuilderLoading, setIsBuilderLoading] = useState(true)
+    const [isLoadingBuilder, setIsLoadingBuilder] = useState(true)
     const [connections, setConnections] = useState({})
+    const [connectionsEmails, setConnectionsEmails] = useState([])
     const [isLoadingConnections, setIsLoadingConnections] = useState(true)
+    const [render, setRender] = useState(false)
 
     const stringToColor = (string) => {
         let hash = 0
@@ -39,6 +41,7 @@ function Connections() {
         setIsLoadingConnections(true)
         const response = await axios.post("/api/users/addConnection", data)
         console.log(response.data)
+
         setIsLoadingConnections(false)
     }
 
@@ -74,7 +77,7 @@ function Connections() {
                                         variant="body2"
                                         color="text.primary"
                                     ></Typography>
-                                    {friend.job !== null
+                                    {friend.job !== ""
                                         ? friend.job
                                         : friend.email}
                                 </Fragment>
@@ -86,7 +89,7 @@ function Connections() {
                             onClick={(event) => {
                                 event.preventDefault()
                                 func(funcInp)
-                                console.log(funcInp)
+                                setRender(!render)
                             }}
                         >
                             {text} Connections
@@ -110,18 +113,24 @@ function Connections() {
             const response = await axios.get("/api/users/builders")
 
             setBuilders(response.data)
-            setIsBuilderLoading(false)
+            setIsLoadingBuilder(false)
         }
         const getConnections = async () => {
             const response = await axios.get("/api/users/connections")
-            console.log(response, "connect")
+
             setConnections(response.data)
+            let userEmailArr = []
+            for (let user of response.data) {
+                userEmailArr.push(user.email)
+            }
+            setConnectionsEmails(userEmailArr)
             setIsLoadingConnections(false)
         }
         getConnections()
         getBuildersList()
         getTradesList()
-    }, [isLoadingConnections])
+    }, [render])
+
     return (
         <div>
             <div>
@@ -129,51 +138,59 @@ function Connections() {
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : (
-                    trades.map((trade, index) => {
-                        return (
-                            <List
-                                key={index}
-                                sx={{
-                                    width: "100%",
-                                    maxWidth: 360,
-                                    bgcolor: "background.paper",
-                                }}
-                            >
-                                {showNewTrades(
-                                    trade,
-                                    "Add to ",
-                                    addConnection,
-                                    trade
-                                )}
-                            </List>
-                        )
-                    })
+                    trades
+                        .filter((trade) => {
+                            return !connectionsEmails.includes(trade.email)
+                        })
+                        .map((trade, index) => {
+                            return (
+                                <List
+                                    key={index}
+                                    sx={{
+                                        width: "100%",
+                                        maxWidth: 360,
+                                        bgcolor: "background.paper",
+                                    }}
+                                >
+                                    {showNewTrades(
+                                        trade,
+                                        "Add to ",
+                                        addConnection,
+                                        trade
+                                    )}
+                                </List>
+                            )
+                        })
                 )}
             </div>
             <div>
                 <h1>New Builders</h1>
-                {isBuilderLoading ? (
+                {isLoadingBuilder ? (
                     <p>Loading...</p>
                 ) : (
-                    builders.map((builder, index) => {
-                        return (
-                            <List
-                                key={index}
-                                sx={{
-                                    width: "100%",
-                                    maxWidth: 360,
-                                    bgcolor: "background.paper",
-                                }}
-                            >
-                                {showNewTrades(
-                                    builder,
-                                    "Add to ",
-                                    addConnection,
-                                    builder
-                                )}
-                            </List>
-                        )
-                    })
+                    builders
+                        .filter((trade) => {
+                            return !connectionsEmails.includes(trade.email)
+                        })
+                        .map((builder, index) => {
+                            return (
+                                <List
+                                    key={index}
+                                    sx={{
+                                        width: "100%",
+                                        maxWidth: 360,
+                                        bgcolor: "background.paper",
+                                    }}
+                                >
+                                    {showNewTrades(
+                                        builder,
+                                        "Add to ",
+                                        addConnection,
+                                        builder
+                                    )}
+                                </List>
+                            )
+                        })
                 )}
             </div>
             <div>
