@@ -39,6 +39,9 @@ CREATE TABLE jobs (
 
 CREATE TABLE assigned_jobs (
     assigned_job_id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    trade VARCHAR(255),
+    trade_id INTEGER,
     job_id INTEGER REFERENCES jobs(job_id),
     user_id INTEGER REFERENCES users(user_id)
 );

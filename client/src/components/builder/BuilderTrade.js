@@ -44,13 +44,26 @@ function BuilderTrade() {
             const response = await axios.get(
                 `/api/builder/trade/${params.trade}`
             )
-            console.log(response.data)
 
             setAvailableTrades(response.data)
             setIsLoadingAvailableTrades(false)
         }
 
         getAvailableTrades()
+    }, [])
+
+    useEffect(() => {
+        const getAssignedTrade = async () => {
+            const response = await axios.get(
+                `/api/builder/assignedTrade/${params.trade}/job/${params.job_id}`
+            )
+            console.log(response.data)
+            if (response.data[response.data.length - 1] !== undefined) {
+                setAssignedTrade(response.data[response.data.length - 1])
+            }
+        }
+
+        getAssignedTrade()
     }, [])
 
     const addMaterials = async (data, event) => {
@@ -61,6 +74,13 @@ function BuilderTrade() {
         )
 
         setSubmitted(!submitted)
+    }
+
+    const assignNewTrade = (data) => {
+        axios.post(
+            `/api/builder/assignedTrade/${params.trade}/job/${params.job_id}`,
+            data
+        )
     }
 
     const handleInput = (event) => {
@@ -82,11 +102,16 @@ function BuilderTrade() {
                 <FormControl fullWidth>
                     <InputLabel>Available Trades</InputLabel>
                     <Select label="Available Trades">
-                        {availableTrades.map((trade) => {
+                        {availableTrades.map((trade, index) => {
                             return (
                                 <MenuItem
-                                    value={{ trade }}
+                                    key={index}
+                                    value={trade.name}
                                     onClick={() => {
+                                        assignNewTrade({
+                                            name: trade.name,
+                                            trade_id: trade.connected_user_id,
+                                        })
                                         setAssignedTrade(trade)
                                     }}
                                 >
@@ -101,9 +126,9 @@ function BuilderTrade() {
                 <div>
                     <div className="builder-trade-heading">
                         <Avatar sx={{ bgcolor: red[500] }}>
-                            {assignedTrade.name.charAt(0)}
+                            {assignedTrade.name.charAt(0).toUpperCase()}
                         </Avatar>
-                        <h1>{assignedTrade.name}</h1>
+                        <h2>{assignedTrade.name.toUpperCase()}</h2>
                     </div>
                     <p>{params.trade}</p>
                 </div>
