@@ -11,6 +11,10 @@ import {
     Checkbox,
     TextField,
     Button,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
 } from "@mui/material"
 
 function BuilderTrade() {
@@ -18,8 +22,12 @@ function BuilderTrade() {
     const [materials, setMaterials] = useState({})
     const [formInput, setFormInput] = useState({})
     const [submitted, setSubmitted] = useState(false)
+    const [availableTrades, setAvailableTrades] = useState({})
+    const [isLoadingAvailableTrades, setIsLoadingAvailableTrades] =
+        useState(true)
+    const [assignedTrade, setAssignedTrade] = useState({})
     const params = useParams()
-    console.log(params.trade)
+
     useEffect(() => {
         const getMaterials = async () => {
             const response = await axios.get(
@@ -30,12 +38,20 @@ function BuilderTrade() {
         }
         getMaterials()
     }, [user, submitted])
-    const trade = {
-        name: "Alex Mercer",
-        job: "Bricklayer",
-        phoneNumber: "0412345678",
-        email: "alex@test.com",
-    }
+
+    useEffect(() => {
+        const getAvailableTrades = async () => {
+            const response = await axios.get(
+                `/api/builder/trade/${params.trade}`
+            )
+            console.log(response.data)
+
+            setAvailableTrades(response.data)
+            setIsLoadingAvailableTrades(false)
+        }
+
+        getAvailableTrades()
+    }, [])
 
     const addMaterials = async (data, event) => {
         event.preventDefault()
@@ -60,13 +76,41 @@ function BuilderTrade() {
     // ]
     return (
         <div className="builder-trade">
-            <div className="builder-trade-heading">
-                <Avatar sx={{ bgcolor: red[500] }}>
-                    {trade.name.charAt(0)}
-                </Avatar>
-                <h1>{trade.name}</h1>
-            </div>
-            <p>{trade.job}</p>
+            {isLoadingAvailableTrades ? (
+                "Loading"
+            ) : (
+                <FormControl fullWidth>
+                    <InputLabel>Available Trades</InputLabel>
+                    <Select label="Available Trades">
+                        {availableTrades.map((trade) => {
+                            return (
+                                <MenuItem
+                                    value={{ trade }}
+                                    onClick={() => {
+                                        setAssignedTrade(trade)
+                                    }}
+                                >
+                                    {trade.name}
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            )}
+            {Object.keys(assignedTrade).length > 0 ? (
+                <div>
+                    <div className="builder-trade-heading">
+                        <Avatar sx={{ bgcolor: red[500] }}>
+                            {assignedTrade.name.charAt(0)}
+                        </Avatar>
+                        <h1>{assignedTrade.name}</h1>
+                    </div>
+                    <p>{params.trade}</p>
+                </div>
+            ) : (
+                <p>Assign a {params.trade}</p>
+            )}
+
             <h1>Add Materials:</h1>
             <form>
                 <TextField

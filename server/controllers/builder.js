@@ -64,4 +64,23 @@ router.get("/materials/user/:user_id/job/:job_id/:trade", (req, res) => {
         })
 })
 
+router.get("/trade/:trade_type", (req, res) => {
+    const job = req.params.trade_type
+    const user_id = req.session.userId
+    console.log(user_id)
+    const sql = `
+        SELECT name, connected_user_id FROM connections WHERE user_id = $1 AND job = $2
+    `
+
+    db.query(sql, [user_id, job])
+        .then((dbResponse) => {
+            res.status(200)
+            res.json(dbResponse.rows)
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json({ error: error, message: "something went wrong" })
+        })
+})
+
 module.exports = router

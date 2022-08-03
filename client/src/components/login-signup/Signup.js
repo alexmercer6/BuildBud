@@ -9,12 +9,12 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormControl from "@mui/material/FormControl"
 import FormLabel from "@mui/material/FormLabel"
 
-function Signup() {
+function SignUp() {
     const [signUpForm, setSignUpForm] = useState({})
 
     const handleInput = (event) => {
         const name = event.target.name
-        const newValue = event.target.value
+        const newValue = event.target.value.toLowerCase()
 
         setSignUpForm({ ...signUpForm, [name]: newValue })
         console.log(signUpForm)
@@ -137,4 +137,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default SignUp
