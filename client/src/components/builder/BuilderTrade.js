@@ -125,7 +125,7 @@ function BuilderTrade() {
             {Object.keys(assignedTrade).length > 0 ? (
                 <div>
                     <div className="builder-trade-heading">
-                        <Avatar sx={{ bgcolor: red[500] }}>
+                        <Avatar>
                             {assignedTrade.name.charAt(0).toUpperCase()}
                         </Avatar>
                         <h2>{assignedTrade.name.toUpperCase()}</h2>
