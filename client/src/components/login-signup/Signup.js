@@ -9,7 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormControl from "@mui/material/FormControl"
 import FormLabel from "@mui/material/FormLabel"
 
-function Signup() {
+function SignUp() {
     const [signUpForm, setSignUpForm] = useState({})
 
     const handleInput = (event) => {
@@ -137,4 +137,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default SignUp
