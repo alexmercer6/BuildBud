@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState, Fragment } from "react"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
@@ -10,6 +11,7 @@ import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
 import { Button } from "@mui/material"
 function Connections() {
+    const [parent] = useAutoAnimate(/* optional config */)
     const [trades, setTrades] = useState({})
     const [builders, setBuilders] = useState({})
     const [isLoading, setIsLoading] = useState(true)
@@ -55,7 +57,7 @@ function Connections() {
     const showNewTrades = (friend, text, func, funcInp) => {
         if (friend !== null) {
             return (
-                <>
+                <div ref={parent}>
                     <ListItem alignItems="flex-start" key={friend.user_id}>
                         <ListItemAvatar key={friend.user_id}>
                             <Avatar
@@ -96,7 +98,7 @@ function Connections() {
                         </Button>
                     </ListItem>
                     <Divider variant="inset" component="li" />
-                </>
+                </div>
             )
         }
     }
@@ -145,6 +147,7 @@ function Connections() {
                         .map((trade, index) => {
                             return (
                                 <List
+                                    ref={parent}
                                     key={index}
                                     sx={{
                                         width: "100%",
@@ -175,6 +178,7 @@ function Connections() {
                         .map((builder, index) => {
                             return (
                                 <List
+                                    ref={parent}
                                     key={index}
                                     sx={{
                                         width: "100%",
@@ -201,6 +205,7 @@ function Connections() {
                     connections.map((connection, index) => {
                         return (
                             <List
+                                ref={parent}
                                 key={index}
                                 sx={{
                                     width: "100%",

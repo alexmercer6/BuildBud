@@ -58,9 +58,7 @@ CREATE TABLE messages (
     user_id INTEGER REFERENCES users(user_id)
 );
 
--- many to many
--- SELECT trade_id FROM connections WHERE builder_id = $1
--- also reversed
+
 CREATE TABLE connections (
     connections_id SERIAL PRIMARY KEY,
     connected_user_id INTEGER NOT NULL,

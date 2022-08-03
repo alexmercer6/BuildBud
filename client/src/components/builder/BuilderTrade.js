@@ -41,7 +41,9 @@ function BuilderTrade() {
 
     useEffect(() => {
         const getAvailableTrades = async () => {
-            const response = await axios.get(`/api/builder/trade/Bricklayer`)
+            const response = await axios.get(
+                `/api/builder/trade/${params.trade}`
+            )
             console.log(response.data)
 
             setAvailableTrades(response.data)

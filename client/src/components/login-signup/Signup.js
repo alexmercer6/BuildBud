@@ -14,7 +14,7 @@ function SignUp() {
 
     const handleInput = (event) => {
         const name = event.target.name
-        const newValue = event.target.value
+        const newValue = event.target.value.toLowerCase()
 
         setSignUpForm({ ...signUpForm, [name]: newValue })
         console.log(signUpForm)
