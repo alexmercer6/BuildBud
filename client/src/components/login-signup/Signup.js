@@ -58,6 +58,7 @@ function SignUp() {
                 <TextField
                     className="form-inputs"
                     required
+                    type={"password"}
                     label="Password"
                     name="password"
                     onChange={(event) => {
@@ -67,6 +68,7 @@ function SignUp() {
                 <TextField
                     className="form-inputs"
                     required
+                    type={"password"}
                     label="Check Password"
                     name="checkPassword"
                     onChange={(event) => {
@@ -102,6 +104,7 @@ function SignUp() {
                     </RadioGroup>
                     {signUpForm.role === "trade" && (
                         <TextField
+                            required
                             className="form-inputs"
                             label="Job"
                             name="job"
@@ -113,6 +116,7 @@ function SignUp() {
 
                     {signUpForm.role === "builder" && (
                         <TextField
+                            required
                             className="form-inputs"
                             label="Company"
                             name="job"

@@ -97,28 +97,18 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="primary">
+            <AppBar
+                position="fixed"
+                sx={{
+                    bgcolor: "#fff",
+                }}
+            >
                 <Toolbar>
-                    {isLoggedIn ? (
-                        <Button variant="standard" onClick={handleLogout}>
-                            Log out
-                        </Button>
-                    ) : (
-                        <Button
-                            variant="standard"
-                            onClick={(event) => {
-                                redirectTo("/login", event)
-                            }}
-                        >
-                            Log In
-                        </Button>
-                    )}
-
                     <IconButton
                         variant="link"
                         size="large"
                         edge="start"
-                        color="inherit"
+                        color="primary"
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={(event) => {
@@ -127,47 +117,45 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                     >
                         <HouseIcon />
                     </IconButton>
-
                     <Typography
                         variant="h4"
                         noWrap
                         component="div"
                         sx={{ display: { sm: "block" } }}
+                        color="primary"
                     >
                         Zing.
                     </Typography>
+
+                    {isLoggedIn ? (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleLogout}
+                        >
+                            Log out
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            onClick={(event) => {
+                                redirectTo("/login", event)
+                            }}
+                        >
+                            Log In
+                        </Button>
+                    )}
+
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show 4 new mails"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={unreadMessages} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge
-                                badgeContent={notificationsCount}
-                                color="error"
-                            >
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: { xs: "flex", md: "none" } }}>
+
+                    <Box sx={{ display: { xs: "flex", lg: "none" } }}>
                         <IconButton
                             size="large"
                             aria-label="show more"
                             aria-controls={mobileMenuId}
                             aria-haspopup="true"
                             onClick={handleMobileMenuOpen}
-                            color="inherit"
+                            color="primary"
                         >
                             <MenuIcon />
                         </IconButton>
