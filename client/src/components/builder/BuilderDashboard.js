@@ -45,14 +45,6 @@ function BuilderDashboard() {
 
     return (
         <div className="builder-dashboard">
-            <Button
-                onClick={(event) => {
-                    redirectTo("/connections", event)
-                }}
-            >
-                {" "}
-                Connections
-            </Button>
             <Jobs
                 data={address}
                 formInput={formInput}

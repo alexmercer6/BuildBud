@@ -11,10 +11,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import BuilderDashboard from "./components/builder/BuilderDashboard"
 import ProtectedRoute from "./components/navbar/protectRoute/ProtectedRoute"
 import Connections from "./components/connections/Connections"
+import Sidebar from "./components/sidebar/Sidebar"
+import { CircularProgress, Fade } from "@mui/material"
 
 function App() {
     const [user, setUser] = useState({})
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(null)
 
     useEffect(() => {
         const getUser = async () => {
@@ -22,13 +24,22 @@ function App() {
 
             let user = response.data
 
-            setUser(user)
             if (user.sessionLoggedIn) {
                 setIsLoggedIn(true)
+                setUser(user)
+            } else {
+                setIsLoggedIn(false)
             }
         }
         getUser()
-    }, [isLoggedIn])
+    }, [])
+    if (isLoggedIn === null) {
+        return (
+            <div className="App">
+                <CircularProgress color="primary" />
+            </div>
+        )
+    }
 
     return (
         <div className="App">
@@ -39,7 +50,7 @@ function App() {
                         setIsLoggedIn={setIsLoggedIn}
                     />
 
-                    {isLoggedIn ? <p>{user.sessionName} hi</p> : "no user"}
+                    {/* {isLoggedIn && <div className="left-container"></div>} */}
 
                     <Routes>
                         <Route path="/signup" element={<SignUp />} />
@@ -57,7 +68,12 @@ function App() {
                             path="builder-dashboard"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderDashboard />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderDashboard />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -65,7 +81,12 @@ function App() {
                             path="builder-dashboard/:user_id/job/:job_id"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderTrades />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderTrades />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -73,7 +94,12 @@ function App() {
                             path="builder-dashboard/:user_id/job/:job_id/:trade"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderTrade />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderTrade />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -82,7 +108,12 @@ function App() {
                             path="connections"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <Connections />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <Connections />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
