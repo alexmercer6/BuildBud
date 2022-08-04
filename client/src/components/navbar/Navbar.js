@@ -127,15 +127,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                         Zing.
                     </Typography>
 
-                    {isLoggedIn ? (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleLogout}
-                        >
-                            Log out
-                        </Button>
-                    ) : (
+                    {!isLoggedIn && (
                         <Button
                             variant="contained"
                             onClick={(event) => {

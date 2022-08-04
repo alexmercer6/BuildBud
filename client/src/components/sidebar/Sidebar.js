@@ -20,6 +20,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications"
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import { CurrentConnections } from "../connections/Connections"
 
 const drawerWidth = 240
 function Sidebar({ setIsLoggedIn }) {
@@ -111,6 +112,8 @@ function Sidebar({ setIsLoggedIn }) {
                         </ListItem>
                     ))}
                 </List>
+                <Divider />
+                <CurrentConnections />
             </Drawer>
             <Box />
         </Box>

@@ -9,7 +9,9 @@ import ListItemText from "@mui/material/ListItemText"
 import ListItemAvatar from "@mui/material/ListItemAvatar"
 import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
-import { Button } from "@mui/material"
+import { Button, CircularProgress } from "@mui/material"
+import PersonAddIcon from "@mui/icons-material/PersonAdd"
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
 function Connections() {
     const [parent] = useAutoAnimate(/* optional config */)
     const [trades, setTrades] = useState({})
@@ -94,7 +96,11 @@ function Connections() {
                                 setRender(!render)
                             }}
                         >
-                            {text} Connections
+                            {text === "add" ? (
+                                <PersonAddIcon />
+                            ) : (
+                                <PersonRemoveIcon />
+                            )}
                         </Button>
                     </ListItem>
                     <Divider variant="inset" component="li" />
@@ -157,7 +163,7 @@ function Connections() {
                                 >
                                     {showNewTrades(
                                         trade,
-                                        "Add to ",
+                                        "add",
                                         addConnection,
                                         trade
                                     )}
@@ -188,7 +194,7 @@ function Connections() {
                                 >
                                     {showNewTrades(
                                         builder,
-                                        "Add to ",
+                                        "add",
                                         addConnection,
                                         builder
                                     )}
@@ -215,7 +221,7 @@ function Connections() {
                             >
                                 {showNewTrades(
                                     connection,
-                                    "Remove From ",
+                                    "remove",
                                     deleteConnection,
                                     connection.connections_id
                                 )}
@@ -224,6 +230,97 @@ function Connections() {
                     })
                 )}
             </div>
+        </div>
+    )
+}
+
+export function CurrentConnections() {
+    const [connections, setConnections] = useState({})
+    const [isLoadingConnections, setIsLoadingConnections] = useState(true)
+
+    const stringToColor = (string) => {
+        let hash = 0
+        let i
+
+        for (i = 0; i < string.length; i += 1) {
+            hash = string.charCodeAt(i) + ((hash << 5) - hash)
+        }
+
+        let color = "#"
+
+        for (i = 0; i < 3; i += 1) {
+            const value = (hash >> (i * 8)) & 0xff
+            color += `00${value.toString(16)}`.slice(-2)
+        }
+
+        return color
+    }
+
+    useEffect(() => {
+        const getConnections = async () => {
+            const response = await axios.get("/api/users/connections")
+
+            setConnections(response.data)
+
+            setIsLoadingConnections(false)
+        }
+        getConnections()
+    }, [])
+
+    if (isLoadingConnections) {
+        return (
+            <div>
+                <CircularProgress color="primary" />
+            </div>
+        )
+    }
+    return (
+        <div>
+            {connections.map((connection, index) => {
+                return (
+                    <List
+                        key={index}
+                        sx={{
+                            width: "100%",
+                            maxWidth: 360,
+                            bgcolor: "background.paper",
+                        }}
+                    >
+                        <ListItem
+                            alignItems="flex-start"
+                            key={connection.user_id}
+                        >
+                            <ListItemAvatar key={connection.user_id}>
+                                <Avatar
+                                    alt={connection.name}
+                                    sx={{
+                                        bgcolor: stringToColor(connection.name),
+                                    }}
+                                >
+                                    {connection.name.charAt(0).toUpperCase()}
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={connection.name.toUpperCase()}
+                                secondary={
+                                    <Fragment>
+                                        <Typography
+                                            sx={{ display: "inline" }}
+                                            component="span"
+                                            variant="body2"
+                                            color="text.primary"
+                                        ></Typography>
+                                        {connection.job !== ""
+                                            ? connection.job
+                                            : connection.email}
+                                    </Fragment>
+                                }
+                            />
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                    </List>
+                )
+            })}
         </div>
     )
 }
