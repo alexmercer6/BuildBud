@@ -27,6 +27,7 @@ app.use(
 
 //middleware
 app.use(express.json())
+app.use(express.static("./client/build"))
 
 //access the routes
 app.use("/api/session", sessionController)
