@@ -38,7 +38,7 @@ function Sidebar({ setIsLoggedIn }) {
     }
 
     const handleClick = (text, event) => {
-        if (text === "Connections") {
+        if (text === "Edit Connections") {
             redirectTo("/connections", event)
         } else if (text === "AddConnections") {
             redirectTo()
@@ -80,8 +80,7 @@ function Sidebar({ setIsLoggedIn }) {
                 <Divider />
                 <List>
                     {[
-                        "Connections",
-                        "Add Connections",
+                        "Edit Connections",
                         "Dashboard",
                         "Messages",
                         "Notifications",
@@ -94,7 +93,7 @@ function Sidebar({ setIsLoggedIn }) {
                                 }}
                             >
                                 <ListItemIcon>
-                                    {text === "Connections" && (
+                                    {text === "Edit Connections" && (
                                         <PeopleAltIcon />
                                     )}
                                     {text === "Add Connections" && (

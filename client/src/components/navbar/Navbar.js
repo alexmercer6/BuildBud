@@ -137,6 +137,16 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                             Log In
                         </Button>
                     )}
+                    {!isLoggedIn && (
+                        <Button
+                            variant="contained"
+                            onClick={(event) => {
+                                redirectTo("/signup", event)
+                            }}
+                        >
+                            Sign Up
+                        </Button>
+                    )}
 
                     <Box sx={{ flexGrow: 1 }} />
 

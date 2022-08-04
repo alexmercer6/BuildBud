@@ -8,9 +8,11 @@ import RadioGroup from "@mui/material/RadioGroup"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import FormControl from "@mui/material/FormControl"
 import FormLabel from "@mui/material/FormLabel"
+import { useNavigate } from "react-router-dom"
 
 function SignUp() {
     const [signUpForm, setSignUpForm] = useState({})
+    const navigate = useNavigate()
 
     const handleInput = (event) => {
         const name = event.target.name
@@ -24,6 +26,11 @@ function SignUp() {
         console.log("clicked")
         const response = await axios.post("/api/users", data)
         console.log(response)
+    }
+
+    const redirectTo = (location, event) => {
+        event.preventDefault()
+        navigate(location)
     }
     return (
         <div className="form-container">
@@ -132,6 +139,7 @@ function SignUp() {
                     onClick={(event) => {
                         event.preventDefault()
                         signUpUser(signUpForm)
+                        redirectTo("/login", event)
                     }}
                 >
                     Sign Up

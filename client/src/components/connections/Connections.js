@@ -140,7 +140,7 @@ function Connections() {
     }, [render])
 
     return (
-        <div>
+        <div className="connections-container">
             <div>
                 <h1>New Trades</h1>
                 {isLoading ? (
@@ -275,7 +275,7 @@ export function CurrentConnections() {
         )
     }
     return (
-        <div>
+        <div className="">
             {connections.map((connection, index) => {
                 return (
                     <List
