@@ -53,9 +53,9 @@ function App() {
                     {/* {isLoggedIn && <div className="left-container"></div>} */}
 
                     <Routes>
-                        <Route path="signup" element={<SignUp />} />
+                        <Route path="#/signup" element={<SignUp />} />
                         <Route
-                            path="/login"
+                            path="#/login"
                             element={
                                 <Login
                                     isLoggedIn={isLoggedIn}
@@ -65,7 +65,7 @@ function App() {
                         />
                         <Route path="/" element="Home" />
                         <Route
-                            path="builder-dashboard"
+                            path="#/builder-dashboard"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <div className="container">
@@ -78,7 +78,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="builder-dashboard/:user_id/job/:job_id"
+                            path="#/builder-dashboard/:user_id/job/:job_id"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <div className="container">
@@ -91,7 +91,7 @@ function App() {
                             }
                         />
                         <Route
-                            path="builder-dashboard/:user_id/job/:job_id/:trade"
+                            path="#/builder-dashboard/:user_id/job/:job_id/:trade"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <div className="container">
@@ -105,7 +105,7 @@ function App() {
                         />
                         {console.log("check", isLoggedIn)}
                         <Route
-                            path="connections"
+                            path="#/connections"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <div className="container">
