@@ -50,7 +50,7 @@ function App() {
                         setIsLoggedIn={setIsLoggedIn}
                     />
 
-                    {isLoggedIn && <Sidebar />}
+                    {/* {isLoggedIn && <div className="left-container"></div>} */}
 
                     <Routes>
                         <Route path="/signup" element={<SignUp />} />
@@ -68,7 +68,12 @@ function App() {
                             path="builder-dashboard"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderDashboard />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderDashboard />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -76,7 +81,12 @@ function App() {
                             path="builder-dashboard/:user_id/job/:job_id"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderTrades />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderTrades />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -84,7 +94,12 @@ function App() {
                             path="builder-dashboard/:user_id/job/:job_id/:trade"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <BuilderTrade />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <BuilderTrade />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
@@ -93,7 +108,12 @@ function App() {
                             path="connections"
                             element={
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                                    <Connections />
+                                    <div className="container">
+                                        <Sidebar
+                                            setIsLoggedIn={setIsLoggedIn}
+                                        />
+                                        <Connections />
+                                    </div>
                                 </ProtectedRoute>
                             }
                         />
