@@ -7,7 +7,7 @@ const pgSession = require("connect-pg-simple")(expressSession)
 require("dotenv").config()
 
 const app = express()
-const port = 4000
+const port = process.env.PORT || 4000
 
 //import routes
 const sessionController = require("./controllers/session")
