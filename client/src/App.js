@@ -53,7 +53,7 @@ function App() {
                     {/* {isLoggedIn && <div className="left-container"></div>} */}
 
                     <Routes>
-                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="signup" element={<SignUp />} />
                         <Route
                             path="/login"
                             element={
