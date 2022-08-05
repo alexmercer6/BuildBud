@@ -30,9 +30,9 @@ router.post("/jobs/:id", (req, res) => {
     })
 })
 
-router.delete("/jobs/:job_id/user/:user_id", (req, res) => {
+router.delete("/jobs/:job_id", (req, res) => {
     const job_id = req.params.job_id
-    const user_id = req.params.user_id
+    const user_id = req.session.userId
     const sql = `
         DELETE FROM jobs WHERE job_id = $1 AND user_id = $2
     `

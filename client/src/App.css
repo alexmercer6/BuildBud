@@ -11,7 +11,8 @@
 
 @media screen and (max-width: 1200px) {
     .container {
-        display: block;
+        grid-template-columns: 1fr;
+
     }
    
   }

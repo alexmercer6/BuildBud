@@ -12,7 +12,7 @@ import BuilderDashboard from "./components/builder/BuilderDashboard"
 import ProtectedRoute from "./components/navbar/protectRoute/ProtectedRoute"
 import Connections from "./components/connections/Connections"
 import Sidebar from "./components/sidebar/Sidebar"
-import { CircularProgress, Fade } from "@mui/material"
+import { CircularProgress } from "@mui/material"
 
 function App() {
     const [user, setUser] = useState({})
@@ -72,6 +72,7 @@ function App() {
                                         <Sidebar
                                             setIsLoggedIn={setIsLoggedIn}
                                         />
+
                                         <BuilderDashboard />
                                     </div>
                                 </ProtectedRoute>

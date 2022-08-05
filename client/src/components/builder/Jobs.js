@@ -29,6 +29,7 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
 
     const deleteJob = async (id, event) => {
         const response = await axios.delete(`/api/builder/jobs/${id}`)
+        console.log(response)
         setClicked(!clicked)
         event.stopPropagation()
     }
@@ -63,8 +64,9 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                                 <HouseIcon />
                                 <ListItemText>{house.address}</ListItemText>
                                 <Button
-                                    onClick={() => {
-                                        deleteJob(house.job_id)
+                                    onClick={(event) => {
+                                        console.log("clicked", event.target)
+                                        deleteJob(house.job_id, event)
                                     }}
                                 >
                                     <DeleteIcon />
