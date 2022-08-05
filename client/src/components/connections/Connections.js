@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography"
 import { Button, CircularProgress } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
-function Connections() {
+function Connections({ sideBarRender, setSideBarRender }) {
     const [parent] = useAutoAnimate(/* optional config */)
     const [trades, setTrades] = useState({})
     const [builders, setBuilders] = useState({})
@@ -95,6 +95,7 @@ function Connections() {
                                 event.preventDefault()
                                 func(funcInp)
                                 setRender(!render)
+                                setSideBarRender(!sideBarRender)
                             }}
                         >
                             {text === "add" ? (
@@ -235,7 +236,7 @@ function Connections() {
     )
 }
 
-export function CurrentConnections() {
+export function CurrentConnections({ sideBarRender }) {
     const [connections, setConnections] = useState({})
     const [isLoadingConnections, setIsLoadingConnections] = useState(true)
 
@@ -266,7 +267,7 @@ export function CurrentConnections() {
             setIsLoadingConnections(false)
         }
         getConnections()
-    }, [])
+    }, [sideBarRender])
 
     if (isLoadingConnections) {
         return (

@@ -18,6 +18,7 @@ import LandingPage from "./components/landingPage/LandingPage"
 function App() {
     const [user, setUser] = useState({})
     const [isLoggedIn, setIsLoggedIn] = useState(null)
+    const [sideBarRender, setSideBarRender] = useState(false)
 
     useEffect(() => {
         const getUser = async () => {
@@ -113,9 +114,13 @@ function App() {
                                 <ProtectedRoute isLoggedIn={isLoggedIn}>
                                     <div className="container">
                                         <Sidebar
-                                            setIsLoggedIn={setIsLoggedIn}
+                                            sideBarRender={sideBarRender}
+                                            setSideBarRender={setSideBarRender}
                                         />
-                                        <Connections />
+                                        <Connections
+                                            sideBarRender={sideBarRender}
+                                            setSideBarRender={setSideBarRender}
+                                        />
                                     </div>
                                 </ProtectedRoute>
                             }

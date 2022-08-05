@@ -22,7 +22,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications"
 import ExitToAppIcon from "@mui/icons-material/ExitToApp"
 
 const drawerWidth = 240
-function Sidebar({ setIsLoggedIn }) {
+function Sidebar({ setIsLoggedIn, sideBarRender, setSideBarRender }) {
     const navigate = useNavigate()
 
     const redirectTo = (location, event) => {
@@ -111,7 +111,10 @@ function Sidebar({ setIsLoggedIn }) {
                     ))}
                 </List>
                 <Divider />
-                <CurrentConnections />
+                <CurrentConnections
+                    sideBarRender={sideBarRender}
+                    setSideBarRender={setSideBarRender}
+                />
             </Drawer>
             <Box />
         </Box>
