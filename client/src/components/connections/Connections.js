@@ -1,3 +1,4 @@
+import "../builder/Builder.css"
 import axios from "axios"
 import { useEffect, useState, Fragment } from "react"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
@@ -142,7 +143,7 @@ function Connections() {
     return (
         <div className="connections-container">
             <div>
-                <h1>New Trades</h1>
+                <p style={{ fontSize: "50px" }}>New Trades</p>
                 {isLoading ? (
                     <CircularProgress color="primary" />
                 ) : (
@@ -173,7 +174,7 @@ function Connections() {
                 )}
             </div>
             <div>
-                <h1>New Builders</h1>
+                <p style={{ fontSize: "50px" }}>New Builders</p>
                 {isLoadingBuilder ? (
                     <CircularProgress color="primary" />
                 ) : (
@@ -204,7 +205,7 @@ function Connections() {
                 )}
             </div>
             <div>
-                <h1>Connections</h1>
+                <p style={{ fontSize: "50px" }}>Connections</p>
                 {isLoadingConnections ? (
                     <CircularProgress color="primary" />
                 ) : (

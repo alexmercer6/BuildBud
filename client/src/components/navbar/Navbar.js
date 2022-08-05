@@ -206,7 +206,9 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={(event) => {
-                            redirectTo("/builder-dashboard", event)
+                            isLoggedIn
+                                ? redirectTo("/builder-dashboard", event)
+                                : redirectTo("/", event)
                         }}
                     >
                         <HouseIcon />

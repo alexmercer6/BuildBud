@@ -1,6 +1,5 @@
 import axios from "axios"
 import Avatar from "@mui/material/Avatar"
-import { red } from "@mui/material/colors"
 import { useParams } from "react-router-dom"
 import { UserContext } from "../../UserContext"
 import { useContext, useEffect, useState } from "react"
@@ -16,6 +15,8 @@ import {
     FormControl,
     InputLabel,
 } from "@mui/material"
+
+import { indigo } from "@mui/material/colors"
 
 function BuilderTrade() {
     const { user } = useContext(UserContext)
@@ -125,19 +126,19 @@ function BuilderTrade() {
             {Object.keys(assignedTrade).length > 0 ? (
                 <div>
                     <div className="builder-trade-heading">
-                        <Avatar>
+                        <Avatar sx={{ bgcolor: indigo[800] }}>
                             {assignedTrade.name.charAt(0).toUpperCase()}
                         </Avatar>
                         <h2>{assignedTrade.name.toUpperCase()}</h2>
                     </div>
-                    <p>{params.trade}</p>
+                    <p>{params.trade.toUpperCase()}</p>
                 </div>
             ) : (
                 <p>Assign a {params.trade}</p>
             )}
 
-            <h1>Add Materials:</h1>
-            <form>
+            <p style={{ fontSize: "40px" }}>Add Materials:</p>
+            <form className="materials-form">
                 <TextField
                     required
                     label="Material"
@@ -160,7 +161,7 @@ function BuilderTrade() {
                         addMaterials(formInput, event)
                     }}
                 >
-                    Add Materials
+                    Materials
                 </Button>
             </form>
 
@@ -172,7 +173,7 @@ function BuilderTrade() {
                     bgcolor: "background.paper",
                 }}
             >
-                <h1>Materials needed:</h1>
+                <p style={{ fontSize: "40px" }}>Materials Needed:</p>
                 {materials.length > 0 ? (
                     materials.map((material, index) => {
                         return (
