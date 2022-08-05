@@ -14,8 +14,14 @@
 .form-container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     /* justify-content: center; */
+}
+
+.log-in-form > h1, .sign-up-form > h1 {
+    margin: 10px;
 }
 
 /* breakpoints */

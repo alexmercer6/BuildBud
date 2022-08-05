@@ -10,7 +10,13 @@ import MenuItem from "@mui/material/MenuItem"
 import Menu from "@mui/material/Menu"
 
 import MailIcon from "@mui/icons-material/Mail"
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt"
+import PersonAddIcon from "@mui/icons-material/PersonAdd"
+import DashboardIcon from "@mui/icons-material/Dashboard"
 import NotificationsIcon from "@mui/icons-material/Notifications"
+import ExitToAppIcon from "@mui/icons-material/ExitToApp"
+import LockOpenIcon from "@mui/icons-material/LockOpen"
+import VpnKeyIcon from "@mui/icons-material/VpnKey"
 
 import MenuIcon from "@mui/icons-material/Menu"
 import HouseIcon from "@mui/icons-material/House"
@@ -68,6 +74,35 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
+            <MenuItem
+                onClick={(event) => {
+                    console.log("click")
+                    redirectTo("/connections", event)
+                }}
+            >
+                <IconButton
+                    size="large"
+                    aria-label="show 4 new mails"
+                    color="inherit"
+                >
+                    <PeopleAltIcon />
+                </IconButton>
+                <p>Edit Connections</p>
+            </MenuItem>
+            <MenuItem
+                onClick={(event) => {
+                    redirectTo("/builder-dashboard", event)
+                }}
+            >
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <PersonAddIcon />
+                </IconButton>
+                <p>Dashboard</p>
+            </MenuItem>
             <MenuItem>
                 <IconButton
                     size="large"
@@ -91,6 +126,65 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                     </Badge>
                 </IconButton>
                 <p>Notifications</p>
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <ExitToAppIcon />
+                </IconButton>
+                <p>Logout</p>
+            </MenuItem>
+        </Menu>
+    )
+
+    const renderMobileMenuLoggedOut = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem
+                onClick={(event) => {
+                    redirectTo("/signup", event)
+                }}
+            >
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={notificationsCount} color="error">
+                        <VpnKeyIcon />
+                    </Badge>
+                </IconButton>
+                <p>Sign Up</p>
+            </MenuItem>
+            <MenuItem
+                onClick={(event) => {
+                    redirectTo("/login", event)
+                }}
+            >
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <LockOpenIcon />
+                </IconButton>
+                <p>Log In</p>
             </MenuItem>
         </Menu>
     )
@@ -129,7 +223,8 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
                     {!isLoggedIn && (
                         <Button
-                            variant="contained"
+                            sx={{ m: 3, display: { xs: "none", lg: "block" } }}
+                            variant="outlined"
                             onClick={(event) => {
                                 redirectTo("/login", event)
                             }}
@@ -139,7 +234,8 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                     )}
                     {!isLoggedIn && (
                         <Button
-                            variant="contained"
+                            sx={{ m: 3, display: { xs: "none", lg: "block" } }}
+                            variant="outlined"
                             onClick={(event) => {
                                 redirectTo("/signup", event)
                             }}
@@ -164,7 +260,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {isLoggedIn ? renderMobileMenu : renderMobileMenuLoggedOut}
         </Box>
     )
 }

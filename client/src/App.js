@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/navbar/protectRoute/ProtectedRoute"
 import Connections from "./components/connections/Connections"
 import Sidebar from "./components/sidebar/Sidebar"
 import { CircularProgress } from "@mui/material"
+import LandingPage from "./components/landingPage/LandingPage"
 
 function App() {
     const [user, setUser] = useState({})
@@ -53,6 +54,7 @@ function App() {
                     {/* {isLoggedIn && <div className="left-container"></div>} */}
 
                     <Routes>
+                        <Route path="/" element={<LandingPage />} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route
                             path="/login"
@@ -63,7 +65,7 @@ function App() {
                                 />
                             }
                         />
-                        <Route path="/" element="Home" />
+
                         <Route
                             path="/builder-dashboard"
                             element={

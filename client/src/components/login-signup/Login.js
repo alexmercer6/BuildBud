@@ -30,6 +30,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
     return (
         <div className="form-container">
             <form className="log-in-form">
+                <h1>Login</h1>
                 <TextField
                     className="form-inputs"
                     required

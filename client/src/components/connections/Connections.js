@@ -144,7 +144,7 @@ function Connections() {
             <div>
                 <h1>New Trades</h1>
                 {isLoading ? (
-                    <p>Loading...</p>
+                    <CircularProgress color="primary" />
                 ) : (
                     trades
                         .filter((trade) => {
@@ -175,7 +175,7 @@ function Connections() {
             <div>
                 <h1>New Builders</h1>
                 {isLoadingBuilder ? (
-                    <p>Loading...</p>
+                    <CircularProgress color="primary" />
                 ) : (
                     builders
                         .filter((trade) => {
@@ -206,7 +206,7 @@ function Connections() {
             <div>
                 <h1>Connections</h1>
                 {isLoadingConnections ? (
-                    <p>Loading...</p>
+                    <CircularProgress color="primary" />
                 ) : (
                     connections.map((connection, index) => {
                         return (

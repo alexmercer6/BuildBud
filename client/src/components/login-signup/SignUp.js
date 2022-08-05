@@ -35,6 +35,7 @@ function SignUp() {
     return (
         <div className="form-container">
             <form className="sign-up-form">
+                <h1>Sign Up</h1>
                 <TextField
                     className="form-inputs"
                     required
