@@ -223,6 +223,8 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                         Zing.
                     </Typography>
 
+                    <Box sx={{ flexGrow: 1 }} />
+
                     {!isLoggedIn && (
                         <Button
                             sx={{ m: 3, display: { xs: "none", lg: "block" } }}
@@ -245,8 +247,6 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                             Sign Up
                         </Button>
                     )}
-
-                    <Box sx={{ flexGrow: 1 }} />
 
                     <Box sx={{ display: { xs: "flex", lg: "none" } }}>
                         <IconButton

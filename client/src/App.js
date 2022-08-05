@@ -50,6 +50,7 @@ function App() {
                     <Navbar
                         isLoggedIn={isLoggedIn}
                         setIsLoggedIn={setIsLoggedIn}
+                        user={user}
                     />
 
                     {/* {isLoggedIn && <div className="left-container"></div>} */}
