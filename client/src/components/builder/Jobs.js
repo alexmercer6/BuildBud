@@ -19,6 +19,7 @@ import {
 
 function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
     const { user } = useContext(UserContext)
+    const [search, setSearch] = useState("")
     const [parent] = useAutoAnimate(/* optional config */)
     const navigate = useNavigate()
 
@@ -34,6 +35,10 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
         event.stopPropagation()
     }
 
+    const handleChange = (event) => {
+        setSearch(event.target.value)
+    }
+
     return (
         <div>
             <AddJobsModal
@@ -47,34 +52,41 @@ function Jobs({ data, formInput, setFormInput, setClicked, clicked }) {
                 label="Search Jobs"
                 variant="standard"
                 fullWidth={true}
+                onChange={(event) => {
+                    handleChange(event)
+                }}
             />
             <div className="listContainer" ref={parent}>
-                {data.map((house, index) => {
-                    return (
-                        <List key={index} color="primary">
-                            <ListItemButton
-                                variant="link"
-                                onClick={(event) => {
-                                    redirectTo(
-                                        `/builder-dashboard/${user.sessionId}/job/${house.job_id}`,
-                                        event
-                                    )
-                                }}
-                            >
-                                <HouseIcon />
-                                <ListItemText>{house.address}</ListItemText>
-                                <Button
+                {data
+                    .filter((job) =>
+                        job.address.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map((house, index) => {
+                        return (
+                            <List key={index} color="primary">
+                                <ListItemButton
+                                    variant="link"
                                     onClick={(event) => {
-                                        console.log("clicked", event.target)
-                                        deleteJob(house.job_id, event)
+                                        redirectTo(
+                                            `/builder-dashboard/${user.sessionId}/job/${house.job_id}`,
+                                            event
+                                        )
                                     }}
                                 >
-                                    <DeleteIcon />
-                                </Button>
-                            </ListItemButton>
-                        </List>
-                    )
-                })}
+                                    <HouseIcon />
+                                    <ListItemText>{house.address}</ListItemText>
+                                    <Button
+                                        onClick={(event) => {
+                                            console.log("clicked", event.target)
+                                            deleteJob(house.job_id, event)
+                                        }}
+                                    >
+                                        <DeleteIcon />
+                                    </Button>
+                                </ListItemButton>
+                            </List>
+                        )
+                    })}
             </div>
         </div>
     )
