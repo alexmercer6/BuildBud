@@ -1,11 +1,10 @@
 import "./LandingPage.css"
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 function LandingPage() {
-    const [parent] = useAutoAnimate(/* optional config */)
     return (
         <div className="landing-page">
             <h1
+                data-testid="main-title"
                 style={{
                     fontSize: "100px",
                     textAlign: "center",
