@@ -30,6 +30,10 @@ Yarn install
 -   yarn add axios
 -   yarn add autoAnimate
 
-#### cd into the client folder and yarn start to run the client
+#### cd into the client folder to run client
 
-#### cd into the Zing folder and yarn start:dev to run dev server
+    yarn start
+
+#### cd into the Zing folder to run dev server
+
+    yarn start:dev
