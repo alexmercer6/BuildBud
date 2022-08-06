@@ -36,6 +36,11 @@ app.use("/api/users", usersController)
 app.use("/api/builder", builderController)
 app.use("/api/trade", tradeController)
 
+/* final catch-all route to index.html defined last */
+app.get("/*", (req, res) => {
+    res.sendFile(__dirname + "/client/build/index.html")
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`)
 })
