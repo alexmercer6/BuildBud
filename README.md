@@ -29,6 +29,7 @@ Yarn install
 -   yarn add dotenv
 -   yarn add axios
 -   yarn add autoAnimate
+-   yarn add react-router-dom
 
 #### cd into the client folder to run client
 
@@ -37,3 +38,20 @@ Yarn install
 #### cd into the Zing folder to run dev server
 
     yarn start:dev
+
+## Routes
+
+Created a component that is used to wrap a component that is only accessible if the user is logged in.
+
+```
+import { Navigate } from "react-router-dom"
+
+function ProtectedRoute({ isLoggedIn, children }) {
+    if (!isLoggedIn) {
+        return <Navigate replace to="/login" />
+    }
+    return children
+}
+
+export default ProtectedRoute
+```
